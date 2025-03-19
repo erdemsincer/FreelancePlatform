@@ -1,0 +1,6 @@
+@freelance_platform_ui.Server_HostAddress = http://localhost:5180
+
+GET {{freelance_platform_ui.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
