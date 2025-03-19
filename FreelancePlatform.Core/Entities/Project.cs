@@ -17,5 +17,6 @@
         public ICollection<Bid> Bids { get; set; }
         public ICollection<ProjectTask> Tasks { get; set; }
         public ICollection<Payment> Payments { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
     }
 }
