@@ -37,5 +37,14 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _userRoleDal.UpdateAsync(entity);
         }
+        public async Task AssignRoleAsync(int userId, int roleId)
+        {
+            await _userRoleDal.AssignRoleAsync(userId, roleId);
+        }
+        public async Task<List<UserRole>> GetRolesByUserId(int userId)
+        {
+            return await _userRoleDal.GetRolesByUserId(userId);
+        }
+
     }
 }
