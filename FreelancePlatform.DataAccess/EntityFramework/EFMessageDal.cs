@@ -5,10 +5,11 @@ using FreelancePlatform.DataAccess.Repositories;
 
 namespace FreelancePlatform.DataAccess.EntityFramework
 {
-    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
+    public class EFMessageDal : GenericRepository<Message>, IMessageDal
     {
-        public EFCategoryDal(ApplicationDbContext context) : base(context)
+        public EFMessageDal(ApplicationDbContext context) : base(context)
         {
         }
     }
 }
+

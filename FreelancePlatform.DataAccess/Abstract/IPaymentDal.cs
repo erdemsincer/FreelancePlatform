@@ -2,8 +2,7 @@
 
 namespace FreelancePlatform.DataAccess.Abstract
 {
-    public interface IUserDal : IGenericDal<User>
+    public interface IPaymentDal: IGenericDal<Payment>
     {
-       
     }
 }

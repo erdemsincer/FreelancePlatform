@@ -5,10 +5,10 @@ using FreelancePlatform.DataAccess.Repositories;
 
 namespace FreelancePlatform.DataAccess.EntityFramework
 {
-    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
+    public class EFReviewDal : GenericRepository<Review>, IReviewDal
     {
-        public EFCategoryDal(ApplicationDbContext context) : base(context)
+        public EFReviewDal(ApplicationDbContext context) : base(context)
         {
-        }
+    }
     }
 }

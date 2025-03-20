@@ -5,9 +5,9 @@ using FreelancePlatform.DataAccess.Repositories;
 
 namespace FreelancePlatform.DataAccess.EntityFramework
 {
-    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
+    public class EFNotificationDal : GenericRepository<Notification>, INotificationDal
     {
-        public EFCategoryDal(ApplicationDbContext context) : base(context)
+        public EFNotificationDal(ApplicationDbContext context) : base(context)
         {
         }
     }

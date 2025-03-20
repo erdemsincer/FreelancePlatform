@@ -2,7 +2,7 @@
 
 namespace FreelancePlatform.Services.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IAttachmentService :IGenericService<Attachment>
     {
     }
 }

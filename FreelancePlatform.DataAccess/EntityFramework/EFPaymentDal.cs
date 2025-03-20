@@ -2,12 +2,17 @@
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.DataAccess.Contexts;
 using FreelancePlatform.DataAccess.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FreelancePlatform.DataAccess.EntityFramework
 {
-    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
+    public class EFPaymentDal : GenericRepository<Payment>, IPaymentDal
     {
-        public EFCategoryDal(ApplicationDbContext context) : base(context)
+        public EFPaymentDal(ApplicationDbContext context) : base(context)
         {
         }
     }

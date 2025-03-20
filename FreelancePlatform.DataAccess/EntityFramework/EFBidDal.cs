@@ -5,9 +5,9 @@ using FreelancePlatform.DataAccess.Repositories;
 
 namespace FreelancePlatform.DataAccess.EntityFramework
 {
-    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
+    public class EFBidDal : GenericRepository<Bid>, IBidDal
     {
-        public EFCategoryDal(ApplicationDbContext context) : base(context)
+        public EFBidDal(ApplicationDbContext context) : base(context)
         {
         }
     }
