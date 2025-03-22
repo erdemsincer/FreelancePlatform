@@ -34,5 +34,16 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                                  .Where(ur => ur.UserId == userId)
                                  .ToListAsync();
         }
+
+        public async Task<List<UserRole>> GetAllUserRolesAsync()
+        {
+            return await _context.UserRoles
+        .Include(ur => ur.User)
+        .Include(ur => ur.Role)
+        .AsNoTracking()
+        .ToListAsync();// User ve Role'ü dahil etmiyoruz
+        }
+
+       
     }
 }

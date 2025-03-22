@@ -6,5 +6,7 @@ namespace FreelancePlatform.DataAccess.Abstract
     {
         Task AssignRoleAsync(int userId, int roleId);
         Task<List<UserRole>> GetRolesByUserId(int userId);
+        Task<List<UserRole>> GetAllUserRolesAsync();  // User ve Role dahil etmeden listeler
+        
     }
 }

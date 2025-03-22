@@ -6,5 +6,7 @@ namespace FreelancePlatform.Services.Abstract
     {
         Task AssignRoleAsync(int userId, int roleId);
         Task<List<UserRole>> GetRolesByUserId(int userId);
+        Task<List<UserRole>> GetAllUserRolesAsync();
+        
     }
 }

@@ -45,6 +45,10 @@ namespace FreelancePlatform.Services.Concrete
         {
             return await _userRoleDal.GetRolesByUserId(userId);
         }
+        public async Task<List<UserRole>> GetAllUserRolesAsync()
+        {
+            return await _userRoleDal.GetAllUserRolesAsync();
+        }
 
     }
 }

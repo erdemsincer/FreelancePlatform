@@ -44,6 +44,7 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<CreatePaymentDto, Payment>();
 
             CreateMap<Notification, ResultNotificationDto>().ReverseMap();
+            CreateMap<CreateNotificationDto, Notification>();
 
             CreateMap<Review, ResultReviewDto>().ReverseMap();
             CreateMap<CreateReviewDto, Review>();
@@ -61,7 +62,10 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<Role, ResultRoleDto>().ReverseMap();
             CreateMap<CreateRoleDto, Role>();
 
-            CreateMap<UserRole, ResultUserRoleDto>().ReverseMap();
+            CreateMap<UserRole, ResultUserRoleDto>()
+           .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+           .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name));
+
             CreateMap<CreateUserRoleDto, UserRole>();
 
             CreateMap<ProjectTask, ResultProjectTaskDto>().ReverseMap();
