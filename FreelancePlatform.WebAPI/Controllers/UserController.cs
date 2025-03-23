@@ -60,5 +60,13 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _userService.TDeleteAsync(user);
             return Ok(new { message = "Kullanıcı başarıyla silindi!" });
         }
+        [HttpGet("freelancers")]
+        public async Task<IActionResult> GetFreelancers()
+        {
+            var freelancers = await _userService.GetFreelancerUsersAsync();
+            return Ok(freelancers);
+        }
+
+
     }
 }

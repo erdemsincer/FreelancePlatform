@@ -1,0 +1,52 @@
+﻿@model List<FreelancePlatform.Core.DTOs.UserDtos.ResultUserDto>
+
+<section class="freelancer-list-section text-center py-5" style="background-color: #f9fbfd;">
+    <div class="container">
+        <h2 class="fw-bold">Bionluk <span style="color: #0d6efd;">Freelancerları</span></h2>
+        <p class="text-muted mb-5">Kendi alanlarında uzman, özenle seçilmiş freelancerlarımızla tanışın.</p>
+
+        <div class="row g-4">
+            @foreach (var user in Model.Take(4))
+            {
+                <div class="col-md-3 col-sm-6">
+                    <div class="card shadow-sm border-0 h-100 rounded-4">
+                        <div style="height: 200px; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                            <img src="@user.ProfileImageUrl" class="w-100 h-100 object-fit-cover" alt="@user.FirstName @user.LastName">
+                        </div>
+                        <div class="card-body text-start">
+                            <h5 class="fw-bold mb-1">@user.FirstName @user.LastName</h5>
+                            <p class="text-secondary small mb-1">Üye Olduğu Tarih: @user.CreatedAt.ToString("dd.MM.yyyy")</p>
+                            <p class="text-muted small">@user.Email</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 d-flex gap-2 justify-content-between">
+                            <a href="/Users/Detail/@user.Id" class="btn btn-outline-primary btn-sm w-50 rounded-pill">Profili Gör</a>
+                            <a href="/Messages/Send?userId=@user.Id" class="btn btn-outline-dark btn-sm w-50 rounded-pill">Mesaj Gönder</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <a href="/Users" class="btn btn-outline-dark mt-4 rounded-pill px-4 py-2">Tüm Freelancerları Gör</a>
+    </div>
+</section>
+
+<style>
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        transition: 0.3s;
+    }
+
+    .card-body h5 {
+        color: #212529;
+    }
+
+    .freelancer-list-section a.btn {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+</style>

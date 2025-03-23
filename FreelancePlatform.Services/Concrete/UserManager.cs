@@ -1,4 +1,5 @@
-﻿using FreelancePlatform.Core.Entities;
+﻿using FreelancePlatform.Core.DTOs.UserDtos;
+using FreelancePlatform.Core.Entities;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.Services.Abstract;
 
@@ -13,6 +14,12 @@ namespace FreelancePlatform.Services.Concrete
         {
             _userDal = userDal;
         }
+
+        public async Task<List<ResultUserDto>> GetFreelancerUsersAsync()
+        {
+            return await _userDal.GetFreelancerUsersAsync();
+        }
+
 
         public async Task TAddAsync(User entity)
         {
