@@ -1,4 +1,4 @@
-using FreelancePlatform.Core.Configuration;
+ï»¿using FreelancePlatform.Core.Configuration;
 using FreelancePlatform.Core.MappingProfiles;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.DataAccess.Contexts;
@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Dependency Injection - Dallar ve Servisler
+// Dependency Injection
 builder.Services.AddScoped<IUserDal, EFUserDal>();
 builder.Services.AddScoped<IUserService, UserManager>();
 builder.Services.AddScoped<IProjectDal, EFProjectDal>();
@@ -39,6 +39,7 @@ builder.Services.AddScoped<ISkillDal, EFSkillDal>();
 builder.Services.AddScoped<ISkillService, SkillManager>();
 builder.Services.AddScoped<IUserSkillDal, EFUserSkillDal>();
 builder.Services.AddScoped<IUserSkillService, UserSkillManager>();
+builder.Services.AddScoped<IUserService, UserManager>();
 builder.Services.AddScoped<IRoleDal, EFRoleDal>();
 builder.Services.AddScoped<IRoleService, RoleManager>();
 builder.Services.AddScoped<IUserRoleDal, EFUserRoleDal>();
@@ -54,7 +55,18 @@ builder.Services.AddScoped<TokenHelper>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// JWT Authentication Middleware
+// âœ… CORS Policy Ekle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+// JWT Authentication
 var jwtConfig = builder.Configuration.GetSection("JwtSettings").Get<JwtConfig>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -71,7 +83,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Swagger & Controllers
+// Controllers & Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -87,7 +99,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Authentication & Authorization middleware çaðrýlarý (Sýrasý önemli!)
+// âœ… CORS Middleware'i burada Ã§aÄŸÄ±r
+app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
