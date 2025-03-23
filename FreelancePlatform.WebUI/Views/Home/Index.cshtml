@@ -1,5 +1,6 @@
 ﻿@{
-    Layout = "~/Views/UILayout/Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@await Component.InvokeAsync("BannerViewComponent")
+@await Component.InvokeAsync("Banner")
+@await Component.InvokeAsync("About")

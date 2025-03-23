@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neden Freelancer View Component</title>
+    <style>
+        .freelancer-info-section {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: #fff;
+        }
+
+        .freelancer-info-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .freelancer-info-section p.subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+        }
+
+        .info-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .info-card {
+            width: 300px;
+            text-align: center;
+        }
+
+        .info-card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .info-card h4 {
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+
+        .info-card p {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .freelancer-info-section .btn-register {
+            margin-top: 40px;
+            padding: 12px 30px;
+            border: 1px solid #212529;
+            border-radius: 50px;
+            background-color: #fff;
+            color: #212529;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .freelancer-info-section .btn-register:hover {
+            background-color: #212529;
+            color: #fff;
+        }
+
+       
+        }
+    </style>
+</head>
+<body>
+    <section class="freelancer-info-section">
+        <h2>Neden <span style="color: #0d6efd;">Freelancer?</span></h2>
+        <p class="subtitle">Geleceğin "çalışma" modeliyle bugünden tanışın.</p>
+        <div class="info-cards">
+            <div class="info-card">
+                <img src="https://gcdn.bionluk.com/site/general/search_bi.png" alt="Sınırsızlık">
+                <h4>Sınırsızlık, Özgürleştirir</h4>
+                <p>Sınırsız düşünebilmen için bütün sınırları kaldırdık. Artık yalnızca bulunduğun bölgeden değil dünyanın her yerinden global yeteneklerle, özgürce çalışabilmen için…</p>
+            </div>
+            <div class="info-card">
+                <img src="https://gcdn.bionluk.com/site/general/contact-order_bi.png" alt="Bakış Açını Genişlet">
+                <h4>Bakış Açını Genişlet</h4>
+                <p>El elden, göz gözden üstündür. Hedef kitleni ne kadar genişletmek istersen, o kadar farklı gözle bakmayı öğrenirsin. Biz senin için her pencereyi açtık, bakmak sana kaldı.</p>
+            </div>
+            <div class="info-card">
+                <img src="https://gcdn.bionluk.com/site/general/done_bi.png" alt="Aklın Yolu Free">
+                <h4>Aklın Yolu Free</h4>
+                <p>Becerikli bir işveren, kaynaklarını en verimli nasıl kullanacağını bilen iş verendir. Kaynaklarını olabildiğince verimli kullanmak adına freelancer’lara şans verin; göreceksin ki her akıl, her işe değer katar.</p>
+            </div>
+        </div>
+        <a href="/Auth/Register" class="btn-register">Hemen Kaydol</a>
+    </section>
+</body>
+</html>

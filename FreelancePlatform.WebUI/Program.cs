@@ -28,6 +28,6 @@ app.UseAuthorization();        // Authorization da burada
 // Default route —> Auth/Login
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=İndex}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
