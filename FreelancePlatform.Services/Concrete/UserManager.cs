@@ -45,5 +45,9 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _userDal.UpdateAsync(entity);
         }
+        public async Task<User> GetUserDetailAsync(int id)
+        {
+            return await _userDal.GetUserDetailAsync(id);
+        }
     }
 }

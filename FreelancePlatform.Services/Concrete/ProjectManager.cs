@@ -1,4 +1,5 @@
-﻿using FreelancePlatform.Core.Entities;
+﻿using FreelancePlatform.Core.DTOs.ProjectDtos;
+using FreelancePlatform.Core.Entities;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.Services.Abstract;
 using System;
@@ -42,5 +43,14 @@ namespace FreelancePlatform.Services.Concrete
         {
            await _projectDal.UpdateAsync(entity);
         }
+        public async Task<List<ResultProjectDto>> GetAllProjectDetailsAsync()
+        {
+            return await _projectDal.GetAllProjectDetailsAsync();
+        }
+        public async Task<ResultProjectDto> GetProjectDetailByIdAsync(int id)
+        {
+            return await _projectDal.GetProjectDetailByIdAsync(id);
+        }
+
     }
 }

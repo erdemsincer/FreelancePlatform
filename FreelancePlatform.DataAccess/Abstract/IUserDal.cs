@@ -6,7 +6,7 @@ namespace FreelancePlatform.DataAccess.Abstract
     public interface IUserDal : IGenericDal<User>
     {
         Task<List<ResultUserDto>> GetFreelancerUsersAsync();
-
+        Task<User> GetUserDetailAsync(int id);
 
     }
 }

@@ -33,6 +33,14 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 })
                 .ToListAsync();
         }
+        public async Task<User> GetUserDetailAsync(int id)
+        {
+            return await _context.Users
+                .Include(u => u.UserSkills).ThenInclude(us => us.Skill)
+                .Include(u => u.Projects)
+                .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                .FirstOrDefaultAsync(u => u.Id == id);
+        }
 
     }
 }
