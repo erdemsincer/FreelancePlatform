@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<FreelancePlatform.Core.DTOs.ProjectDtos.ResultProjectDto>
+
+<section class="projects-list-section text-center py-5" style="background-color: #f9fbfd;">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Tüm <span style="color: #0d6efd;">Projeler</span></h2>
+
+        <div class="row g-4">
+            @foreach (var project in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="card shadow-sm border-0 h-100 rounded-4">
+                        <div class="card-body text-start p-4">
+                            <h5 class="fw-bold mb-2">@project.Title</h5>
+                            <p class="text-muted small mb-2">Kategori: <strong>@project.CategoryName</strong></p>
+                            <p class="small text-secondary mb-3">İşveren: @project.EmployerFullName</p>
+                            <p class="small">@project.Description.Substring(0, Math.Min(project.Description.Length, 120))... </p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="fw-bold text-success">Bütçe: @project.Budget TL</span>
+                                <span class="badge bg-primary">@project.Status</span>
+                            </div>
+                            <p class="text-muted mt-2 small">Yayın Tarihi: @project.CreatedAt.ToString("dd.MM.yyyy")</p>
+                            @if (project.Deadline != null)
+                            {
+                                <p class="text-danger small">Son Teslim: @project.Deadline?.ToString("dd.MM.yyyy")</p>
+                            }
+                        </div>
+                        <div class="card-footer bg-white border-0 d-flex gap-2 justify-content-between p-3">
+                            <a href="/Project/Detail/@project.Id" class="btn btn-outline-primary btn-sm w-50 rounded-pill">Detayları Gör</a>
+                            <a href="/Offers/Create?projectId=@project.Id" class="btn btn-outline-success btn-sm w-50 rounded-pill">Teklif Ver</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .projects-list-section .card:hover {
+        transform: translateY(-4px);
+        transition: 0.3s;
+    }
+
+    .projects-list-section .card-body h5 {
+        color: #212529;
+    }
+
+    .projects-list-section a.btn {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .projects-list-section p.small {
+        font-size: 0.9rem;
+    }
+</style>
+

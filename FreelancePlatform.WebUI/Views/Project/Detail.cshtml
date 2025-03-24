@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model FreelancePlatform.Core.DTOs.ProjectDtos.ResultProjectDto
+
+<section class="project-detail-section py-5" style="background-color: #f9fbfd;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm border-0 rounded-4 p-4">
+                    <h2 class="fw-bold mb-3">@Model.Title</h2>
+                    <p class="text-muted mb-4">Kategori: <strong>@Model.CategoryName</strong></p>
+                    <p><strong>İşveren: </strong>@Model.EmployerFullName</p>
+                    <p class="text-secondary">Yayın Tarihi: @Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+                    @if (Model.Deadline != null)
+                    {
+                        <p class="text-danger">Son Teslim Tarihi: @Model.Deadline?.ToString("dd.MM.yyyy")</p>
+                    }
+                    <p class="mt-4">@Model.Description</p>
+
+                    <div class="mt-4 d-flex justify-content-between align-items-center">
+                        <h4 class="text-success">Bütçe: @Model.Budget TL</h4>
+                        <span class="badge bg-primary p-2">@Model.Status</span>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <a href="/Offers/Create?projectId=@Model.Id" class="btn btn-success rounded-pill px-4 py-2">Teklif Ver</a>
+                        <a href="/Project" class="btn btn-outline-dark rounded-pill px-4 py-2 ms-2">Tüm Projelere Dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .project-detail-section .card h2 {
+        color: #212529;
+    }
+    .project-detail-section .card p {
+        font-size: 1rem;
+    }
+    .project-detail-section a.btn {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+</style>
+
+
