@@ -1,6 +1,7 @@
 ﻿using FreelancePlatform.Core.DTOs.AuthDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace FreelancePlatform.WebUI.Controllers
@@ -20,7 +21,6 @@ namespace FreelancePlatform.WebUI.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequestDto model)
         {
@@ -33,16 +33,30 @@ namespace FreelancePlatform.WebUI.Controllers
                 var responseBody = await response.Content.ReadAsStringAsync();
                 var tokenObj = JsonConvert.DeserializeObject<TokenResponseDto>(responseBody);
 
-                // Cookie veya Session’a token kaydet
+                // 1. Token'ı Session'a kaydet
                 HttpContext.Session.SetString("token", tokenObj.Token);
 
-                // Dashboard'a yönlendir
+                // 2. Token'dan UserId'yi çözümle
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(tokenObj.Token);
+
+                var userIdClaim = token.Claims.FirstOrDefault(c =>
+                    c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+
+                if (userIdClaim != null)
+                {
+                    HttpContext.Session.SetInt32("userId", int.Parse(userIdClaim.Value));
+                }
+
+                // 3. Giriş başarılı -> yönlendir
                 return RedirectToAction("Index", "Home");
             }
 
+            // Hatalı giriş
             ViewBag.Error = "Hatalı giriş bilgileri!";
             return View(model);
         }
+
 
         [HttpGet]
         public IActionResult Register()
