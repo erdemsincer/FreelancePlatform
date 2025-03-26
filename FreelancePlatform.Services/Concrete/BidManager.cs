@@ -37,5 +37,14 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _bidDal.UpdateAsync(entity);
         }
+        public async Task<List<Bid>> GetBidsByProjectIdAsync(int projectId)
+        {
+            return await _bidDal.GetBidsByProjectIdAsync(projectId);
+        }
+
+        public async Task<List<Bid>> GetBidsByFreelancerIdAsync(int freelancerId)
+        {
+            return await _bidDal.GetBidsByFreelancerIdAsync(freelancerId);
+        }
     }
 }

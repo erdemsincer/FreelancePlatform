@@ -4,5 +4,7 @@ namespace FreelancePlatform.DataAccess.Abstract
 {
     public interface IBidDal : IGenericDal<Bid>
     {
+        Task<List<Bid>> GetBidsByProjectIdAsync(int projectId);
+        Task<List<Bid>> GetBidsByFreelancerIdAsync(int freelancerId);
     }
 }

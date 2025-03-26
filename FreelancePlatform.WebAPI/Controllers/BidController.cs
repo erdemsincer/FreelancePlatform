@@ -39,6 +39,24 @@ namespace FreelancePlatform.WebAPI.Controllers
             return Ok(resultDto);
         }
 
+        // ✅ Belirli projeye ait teklifleri getir
+        [HttpGet("project/{projectId}")]
+        public async Task<IActionResult> GetBidsByProjectId(int projectId)
+        {
+            var bids = await _bidService.GetBidsByProjectIdAsync(projectId);
+            var resultDtos = _mapper.Map<List<ResultBidDto>>(bids);
+            return Ok(resultDtos);
+        }
+
+        // ✅ Belirli freelancer'a ait teklifleri getir
+        [HttpGet("freelancer/{freelancerId}")]
+        public async Task<IActionResult> GetBidsByFreelancerId(int freelancerId)
+        {
+            var bids = await _bidService.GetBidsByFreelancerIdAsync(freelancerId);
+            var resultDtos = _mapper.Map<List<ResultBidDto>>(bids);
+            return Ok(resultDtos);
+        }
+
         // ✅ Teklif oluştur
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBidDto dto)
@@ -72,4 +90,4 @@ namespace FreelancePlatform.WebAPI.Controllers
             return Ok(new { message = "Teklif başarıyla silindi!" });
         }
     }
-    }
+}
