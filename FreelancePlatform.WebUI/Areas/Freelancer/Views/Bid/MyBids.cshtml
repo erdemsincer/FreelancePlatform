@@ -20,6 +20,7 @@
                             <th>💰 Tutar</th>
                             <th>📝 Mesaj</th>
                             <th>📅 Tarih</th>
+                            <th>📅 Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,7 @@
                                 <td class="fw-bold text-success">@bid.OfferAmount ₺</td>
                                 <td class="text-muted text-truncate" style="max-width: 250px;">@bid.Message</td>
                                 <td class="text-secondary">@bid.CreatedAt.ToString("dd MMM yyyy")</td>
+                                <td class="text-secondary">@bid.Status</td>
                             </tr>
                         }
                     </tbody>
