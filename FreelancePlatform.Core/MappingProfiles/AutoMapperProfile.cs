@@ -33,7 +33,9 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<CreateCategoryDto, Category>();
             CreateMap<UpdateCategoryDto, Category>();
 
-            CreateMap<Bid, ResultBidDto>().ReverseMap();
+            CreateMap<Bid, ResultBidDto>()
+            .ForMember(dest => dest.ProjectTitle, opt => opt.MapFrom(src => src.Project.Title));
+
             CreateMap<CreateBidDto, Bid>();
             CreateMap<UpdateBidDto, Bid>();
 

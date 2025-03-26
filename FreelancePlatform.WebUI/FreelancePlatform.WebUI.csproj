@@ -16,4 +16,9 @@
     <ProjectReference Include="..\FreelancePlatform.Core\FreelancePlatform.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Freelancer\Data\" />
+    <Folder Include="Areas\Freelancer\Models\" />
+  </ItemGroup>
+
 </Project>

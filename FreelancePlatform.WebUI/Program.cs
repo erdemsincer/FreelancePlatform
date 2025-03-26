@@ -2,14 +2,12 @@
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient();          // ✅ HttpClient ekledik
-builder.Services.AddSession();             // ✅ Session desteği eklendi
-builder.Services.AddAuthentication();      // (Eğer cookie-based auth kullanırsan burada yapılandırabilirsin)
+builder.Services.AddHttpClient();
+builder.Services.AddSession();
+builder.Services.AddAuthentication();
 
-// Build application
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -21,11 +19,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession();              // ✅ Session middleware sırası önemli!
-app.UseAuthentication();       // ✅ Authentication burada olmalı
-app.UseAuthorization();        // Authorization da burada
+app.UseSession();
+app.UseAuthentication();
+app.UseAuthorization();
 
-// Default route —> Auth/Login
+// ✅ Area route ekleniyor (Freelancer Area için)
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+// Varsayılan route (genel site)
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
