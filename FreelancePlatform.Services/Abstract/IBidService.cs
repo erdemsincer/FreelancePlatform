@@ -6,5 +6,7 @@ namespace FreelancePlatform.Services.Abstract
     {
         Task<List<Bid>> GetBidsByProjectIdAsync(int projectId);
         Task<List<Bid>> GetBidsByFreelancerIdAsync(int freelancerId);
+        Task AddBidAndUpdateProjectStatusAsync(Bid bid);
+        Task AcceptBidAsync(int bidId);
     }
 }

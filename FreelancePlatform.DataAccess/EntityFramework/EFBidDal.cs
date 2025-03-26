@@ -28,5 +28,30 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Where(b => b.FreelancerId == freelancerId)
                 .ToListAsync();
         }
+        public async Task AddBidAndUpdateProjectStatusAsync(Bid bid)
+        {
+            await _context.Bids.AddAsync(bid);
+
+            var project = await _context.Projects.FindAsync(bid.ProjectId);
+            if (project != null && project.Status == "Açık")
+            {
+                project.Status = "Teklif Alınıyor";
+                _context.Projects.Update(project);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+        public async Task AcceptBidAsync(int bidId)
+        {
+            var bid = await _context.Bids.FindAsync(bidId);
+            if (bid == null) throw new Exception("Teklif bulunamadı!");
+
+            var project = await _context.Projects.FindAsync(bid.ProjectId);
+            if (project == null) throw new Exception("Proje bulunamadı!");
+
+            project.Status = "Kabul Edildi";
+            _context.Projects.Update(project);
+            await _context.SaveChangesAsync();
+        }
     }
 }
