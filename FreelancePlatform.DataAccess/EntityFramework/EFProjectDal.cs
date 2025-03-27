@@ -57,6 +57,6 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 })
                 .FirstOrDefaultAsync();
         }
-
+        
     }
 }

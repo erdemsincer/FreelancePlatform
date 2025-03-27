@@ -1,4 +1,5 @@
-﻿using FreelancePlatform.Core.Entities;
+﻿using FreelancePlatform.Core.DTOs.BidDtos;
+using FreelancePlatform.Core.Entities;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.DataAccess.Contexts;
 using FreelancePlatform.DataAccess.Repositories;
@@ -53,5 +54,25 @@ namespace FreelancePlatform.DataAccess.EntityFramework
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
         }
+        public async Task<List<ResultBidWithProjectDto>> GetBidsByEmployerIdAsync(int employerId)
+        {
+            return await _context.Bids
+                .Include(b => b.Project)
+                .Include(b => b.Freelancer)
+                .Where(b => b.Project.EmployerId == employerId)
+                .Select(b => new ResultBidWithProjectDto
+                {
+                    BidId = b.Id,
+                    ProjectId = b.ProjectId,
+                    ProjectTitle = b.Project.Title,
+                     FreelancerId= b.FreelancerId,
+                    FreelancerName = b.Freelancer.FirstName + " " + b.Freelancer.LastName,
+                    OfferAmount = b.OfferAmount,
+                    Message = b.Message,
+                    CreatedAt = b.CreatedAt
+                })
+                .ToListAsync();
+        }
+
     }
 }

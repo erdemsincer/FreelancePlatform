@@ -66,6 +66,7 @@ namespace FreelancePlatform.WebAPI.Controllers
             var freelancers = await _userService.GetFreelancerUsersAsync();
             return Ok(freelancers);
         }
+     
 
 
     }

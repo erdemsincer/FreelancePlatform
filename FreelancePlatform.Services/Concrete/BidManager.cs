@@ -1,4 +1,5 @@
-﻿using FreelancePlatform.Core.Entities;
+﻿using FreelancePlatform.Core.DTOs.BidDtos;
+using FreelancePlatform.Core.Entities;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.Services.Abstract;
 
@@ -55,5 +56,10 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _bidDal.AcceptBidAsync(bidId);
         }
+        public async Task<List<ResultBidWithProjectDto>> GetBidsByEmployerIdAsync(int employerId)
+        {
+            return await _bidDal.GetBidsByEmployerIdAsync(employerId);
+        }
+
     }
 }

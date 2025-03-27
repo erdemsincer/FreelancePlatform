@@ -52,5 +52,6 @@ namespace FreelancePlatform.Services.Concrete
             return await _projectDal.GetProjectDetailByIdAsync(id);
         }
 
+       
     }
 }

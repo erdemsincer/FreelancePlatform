@@ -8,5 +8,6 @@ namespace FreelancePlatform.DataAccess.Abstract
         Task<List<ResultProjectDto>> GetAllProjectDetailsAsync();
         Task<ResultProjectDto> GetProjectDetailByIdAsync(int projectId);
 
+
     }
 }
