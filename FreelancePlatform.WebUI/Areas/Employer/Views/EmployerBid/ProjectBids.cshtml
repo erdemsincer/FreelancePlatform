@@ -1,0 +1,73 @@
+﻿@model List<FreelancePlatform.Core.DTOs.BidDtos.ResultBidWithProjectDto>
+@{
+    ViewData["Title"] = "ProjectBids";
+    Layout = "~/Areas/Employer/Views/EmployerLayout/Index.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="card shadow-sm rounded-4">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-inbox-fill me-2"></i> Gelen Teklifler</h5>
+            <span class="badge bg-light text-dark">@Model.Count teklif</span>
+        </div>
+        <div class="card-body p-4">
+            @if (!Model.Any())
+            {
+                    <div class="alert alert-info text-center">Bu projeye henüz teklif gelmemiş.</div>
+            }
+            else
+            {
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>👤 Freelancer</th>
+                                    <th>💰 Tutar</th>
+                                    <th>📝 Mesaj</th>
+                                    <th>📅 Tarih</th>
+                                    <th>✅ İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var bid in Model)
+                            {
+                                        <tr>
+                                            <td class="fw-semibold">@bid.FreelancerName</td>
+                                            <td class="text-success fw-bold">@bid.OfferAmount ₺</td>
+                                            <td class="text-muted text-truncate" style="max-width: 200px;">@bid.Message</td>
+                                            <td class="text-secondary">@bid.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                            <td>
+                                        @if (bid.IsAccepted)
+                                        {
+                                                        <span class="badge bg-success">Kabul Edildi</span>
+                                        }
+                                        else
+                                        {
+                                                        <form method="post" asp-action="AcceptBid" asp-controller="Bids" asp-area="Employer">
+                                                            <input type="hidden" name="bidId" value="@bid.BidId" />
+                                                            <button type="submit" class="btn btn-sm btn-primary">Kabul Et</button>
+                                                        </form>
+                                        }
+                                            </td>
+                                        </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-primary {
+        border-radius: 20px;
+        padding: 5px 15px;
+    }
+</style>
