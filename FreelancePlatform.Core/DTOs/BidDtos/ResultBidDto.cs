@@ -10,5 +10,6 @@
         public decimal OfferAmount { get; set; }
         public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string FreelancerFullName { get; set; }
     }
 }
