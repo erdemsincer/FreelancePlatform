@@ -27,9 +27,18 @@
                     </div>
 
                     <div class="mt-4 text-center">
-                        <a href="/Bid/Create/@Model.Id" class="btn btn-success mt-3">Teklif Ver</a>
+                        @if (Model.Status != "Alındı")
+                        {
+                            <a href="/Bid/Create/@Model.Id" class="btn btn-success mt-3">Teklif Ver</a>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary px-4 py-2">Proje Alındı</span>
+                        }
+
                         <a href="/Project" class="btn btn-outline-dark rounded-pill px-4 py-2 ms-2">Tüm Projelere Dön</a>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -43,7 +43,7 @@
                                         }
                                         else
                                         {
-                                                        <form method="post" asp-action="AcceptBid" asp-controller="Bids" asp-area="Employer">
+                                            <form method="post" asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer">
                                                             <input type="hidden" name="bidId" value="@bid.BidId" />
                                                             <button type="submit" class="btn btn-sm btn-primary">Kabul Et</button>
                                                         </form>

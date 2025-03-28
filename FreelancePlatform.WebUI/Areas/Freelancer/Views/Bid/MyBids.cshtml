@@ -1,57 +1,65 @@
-﻿@model List<ResultBidDto>
+﻿@model List<FreelancePlatform.Core.DTOs.BidDtos.ResultBidWithProjectDto>
 @{
     ViewData["Title"] = "Tekliflerim";
     Layout = "~/Areas/Freelancer/Views/FreelancerLayout/Index.cshtml";
 }
 
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Yaptığınız Tüm Teklifler</h2>
 
-<div class="container-fluid px-4">
-    <div class="card shadow-sm rounded-4">
-        <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0"><i class="bi bi-cash-stack me-2"></i> Tekliflerim</h5>
-            <span class="badge bg-light text-dark">@Model.Count teklif</span>
-        </div>
-        <div class="card-body p-4">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle text-center">
-                    <thead class="table-light">
-                        <tr>
-                            <th>📁 Proje</th>
-                            <th>💰 Tutar</th>
-                            <th>📝 Mesaj</th>
-                            <th>📅 Tarih</th>
-                            <th>📅 Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var bid in Model)
-                        {
-                            <tr>
-                                <td class="text-start fw-semibold text-primary">@bid.ProjectTitle</td>
-                                <td class="fw-bold text-success">@bid.OfferAmount ₺</td>
-                                <td class="text-muted text-truncate" style="max-width: 250px;">@bid.Message</td>
-                                <td class="text-secondary">@bid.CreatedAt.ToString("dd MMM yyyy")</td>
-                                <td class="text-secondary">@bid.Status</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">Henüz bir teklifte bulunmadınız.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover text-center align-middle shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>📌 Proje</th>
+                    <th>💰 Tutar</th>
+                    <th>📝 Mesaj</th>
+                    <th>📅 Tarih</th>
+                    <th>📦 Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bid in Model)
+                {
+                    <tr>
+                        <td>@bid.ProjectTitle</td>
+                        <td>@bid.OfferAmount ₺</td>
+                        <td class="text-truncate" style="max-width: 300px;">@bid.Message</td>
+                        <td>@bid.CreatedAt.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            @switch (bid.ProjectStatus)
+                            {
+                                case "Kabul Edildi":
+                                case "Alındı":
+                                    <span class="badge bg-success">Kabul Edildi</span>
+                                    ;
+                                    break;
+                                case "Tamamlandı":
+                                    <span class="badge bg-secondary">Tamamlandı</span>
+                                    ;
+                                    break;
+                                default:
+                                    <span class="badge bg-warning text-dark">Beklemede</span>
+                                    ;
+                                    break;
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
 <style>
-    .table td, .table th {
-        vertical-align: middle !important;
-    }
-
     .text-truncate {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-
-    
     }
 </style>

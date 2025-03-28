@@ -36,8 +36,17 @@
                         </div>
                         <div class="card-footer bg-white border-0 d-flex justify-content-between p-3">
                             <a href="/Project/Detail/@project.Id" class="btn btn-outline-primary btn-sm w-50 rounded-pill">Detayları Gör</a>
-                            <a asp-controller="Bid" asp-action="Create" asp-route-projectId="@project.Id" class="btn btn-success btn-sm w-50 rounded-pill">Teklif Ver</a>
+
+                            @if (project.Status != "Alındı")
+                            {
+                                <a asp-controller="Bid" asp-action="Create" asp-route-projectId="@project.Id" class="btn btn-success btn-sm w-50 rounded-pill">Teklif Ver</a>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary w-50 text-center p-2">Proje Alındı</span>
+                            }
                         </div>
+
                     </div>
                 </div>
             }

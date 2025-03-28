@@ -13,10 +13,12 @@ namespace FreelancePlatform.WebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Create(int projectId)
         {
@@ -35,9 +37,7 @@ namespace FreelancePlatform.WebUI.Controllers
             };
 
             return View(dto);
-
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateBidDto dto)
@@ -54,7 +54,8 @@ namespace FreelancePlatform.WebUI.Controllers
             dto.FreelancerId = userId.Value;
 
             var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var jsonData = JsonConvert.SerializeObject(dto);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -70,6 +71,5 @@ namespace FreelancePlatform.WebUI.Controllers
             TempData["error"] = "Teklif gönderilirken bir hata oluştu.";
             return RedirectToAction("Detail", "Project", new { id = dto.ProjectId });
         }
-
     }
 }
