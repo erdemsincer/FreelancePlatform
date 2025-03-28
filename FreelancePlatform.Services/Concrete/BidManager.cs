@@ -38,7 +38,23 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _bidDal.UpdateAsync(entity);
         }
-       
+        public async Task<List<Bid>> GetBidsByEmployerIdAsync(int employerId)
+        {
+            return await _bidDal.GetBidsByEmployerIdAsync(employerId);
+        }
+        public async Task<bool> AcceptBidAsync(int bidId)
+        {
+            var bid = await _bidDal.GetBidWithProjectAsync(bidId);
+            if (bid == null || bid.Project == null)
+                return false;
+
+            bid.Project.Status = "Alındı";
+
+            await _bidDal.UpdateAsync(bid);
+            return true;
+        }
+
+
 
     }
 }

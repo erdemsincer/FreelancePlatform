@@ -1,0 +1,82 @@
+﻿@model List<FreelancePlatform.Core.DTOs.BidDtos.ResultBidWithProjectDto>
+@{
+    ViewData["Title"] = "Gelen Teklifler";
+    Layout = "~/Areas/Employer/Views/EmployerLayout/Index.cshtml";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="mb-4 text-center fw-bold display-6">Projelerine Gelen <span class="text-primary">Teklifler</span></h2>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center shadow-sm rounded-3 py-4">Henüz teklif gelmemiş.</div>
+        }
+        else
+        {
+            <div class="table-responsive shadow rounded-4">
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-dark text-white">
+                        <tr>
+                            <th>📌 Proje</th>
+                            <th>👤 Freelancer</th>
+                            <th>💰 Tutar</th>
+                            <th>📝 Mesaj</th>
+                            <th>📅 Tarih</th>
+                            <th>📦 Durum</th>
+                            <th>✅ İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bid in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@bid.ProjectTitle</td>
+                                <td>@bid.FreelancerName</td>
+                                <td class="text-success fw-bold">@bid.OfferAmount ₺</td>
+                                <td class="text-muted text-truncate" style="max-width: 220px;">@bid.Message</td>
+                                <td class="text-secondary">@bid.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                <td>
+                                    <span class="badge bg-@(bid.ProjectStatus == "Açık" ? "primary" : bid.ProjectStatus == "Alındı" ? "warning text-dark" : "secondary")">
+                                        @bid.ProjectStatus
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (bid.ProjectStatus == "Alındı")
+                                    {
+                                        <span class="badge bg-success px-3 py-2">Kabul Edildi</span>
+                                    }
+                                    else
+                                    {
+                                        <form asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer" method="post">
+                                            <input type="hidden" name="bidId" value="@bid.BidId" />
+                                            <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill">Kabul Et</button>
+                                        </form>
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+</style>

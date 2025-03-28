@@ -74,9 +74,26 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _bidService.TDeleteAsync(bid);
             return Ok(new { message = "Teklif başarıyla silindi!" });
         }
-     
+        [HttpGet("bids/employer/{employerId}")]
+        public async Task<IActionResult> GetBidsByEmployer(int employerId)
+        {
+            var bids = await _bidService.GetBidsByEmployerIdAsync(employerId);
+            var dto = _mapper.Map<List<ResultBidWithProjectDto>>(bids);
+            return Ok(dto);
+        }
+        [HttpPost("accept/{bidId}")]
+        public async Task<IActionResult> AcceptBid(int bidId)
+        {
+            var result = await _bidService.AcceptBidAsync(bidId);
+            if (!result)
+                return BadRequest("Teklif kabul edilemedi.");
 
-        
+            return Ok("Teklif başarıyla kabul edildi.");
+        }
+
+
+
+
 
     }
 }
