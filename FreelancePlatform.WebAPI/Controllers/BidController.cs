@@ -53,7 +53,7 @@ namespace FreelancePlatform.WebAPI.Controllers
         public async Task<IActionResult> GetBidsByFreelancerId(int freelancerId)
         {
             var bids = await _bidService.GetBidsByFreelancerIdAsync(freelancerId);
-            var resultDtos = _mapper.Map<List<ResultBidDto>>(bids);
+            var resultDtos = _mapper.Map<List<ResultBidWithProjectDto>>(bids);
             return Ok(resultDtos);
         }
 

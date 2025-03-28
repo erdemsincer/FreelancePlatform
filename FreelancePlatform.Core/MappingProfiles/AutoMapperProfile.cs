@@ -74,14 +74,11 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<CreateProjectTaskDto, ProjectTask>();
             CreateMap<UpdateProjectTaskDto, ProjectTask>();
             CreateMap<Bid, ResultBidWithProjectDto>()
-            .ForMember(dest => dest.BidId, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.ProjectId, opt => opt.MapFrom(src => src.Project.Id))
-            .ForMember(dest => dest.ProjectTitle, opt => opt.MapFrom(src => src.Project.Title))
-            .ForMember(dest => dest.FreelancerId, opt => opt.MapFrom(src => src.Freelancer.Id))
-            .ForMember(dest => dest.FreelancerName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName))
-            .ForMember(dest => dest.OfferAmount, opt => opt.MapFrom(src => src.OfferAmount))
-            .ForMember(dest => dest.Message, opt => opt.MapFrom(src => src.Message))
-            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt));
+     .ForMember(dest => dest.BidId, opt => opt.MapFrom(src => src.Id))
+     .ForMember(dest => dest.ProjectTitle, opt => opt.MapFrom(src => src.Project.Title))
+     .ForMember(dest => dest.ProjectStatus, opt => opt.MapFrom(src => src.Project.Status))
+     .ForMember(dest => dest.FreelancerName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName));
+
         }
     }
 }
