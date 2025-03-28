@@ -34,7 +34,10 @@
                             <a href="/Project/Detail/@project.Id" class="btn btn-outline-primary w-100 rounded-pill">Detayları Gör</a>
                             @if (project.Status == "Açık")
                             {
-                                <a href="/Bid/Create/@project.Id" class="btn btn-success w-100 rounded-pill">Teklif Ver</a>
+                                <a asp-controller="Bid" asp-action="Create" asp-route-projectId="@project.Id" class="btn btn-success w-100 rounded-pill">
+                                    Teklif Ver
+                                </a>
+
                             }
                             else
                             {
