@@ -5,8 +5,7 @@ namespace FreelancePlatform.Services.Abstract
 {
     public interface IProjectService : IGenericService<Project>
     {
-        Task<List<ResultProjectDto>> GetAllProjectDetailsAsync();
-        Task<ResultProjectDto> GetProjectDetailByIdAsync(int id);
+        
 
 
     }

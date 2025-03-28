@@ -9,6 +9,6 @@ namespace FreelancePlatform.DataAccess.EntityFramework
     {
         public EFProjectTaskDal(ApplicationDbContext context) : base(context)
         {
-         }
+        }
     }
 }
