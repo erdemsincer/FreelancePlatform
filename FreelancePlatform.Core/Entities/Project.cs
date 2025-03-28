@@ -10,7 +10,7 @@
         public int EmployerId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? Deadline { get; set; }
-        public string Status { get; set; } // Open / InProgress / Completed
+        public string Status { get; set; } = "Açık";
 
         public Category Category { get; set; }
         public User Employer { get; set; }

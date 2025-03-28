@@ -47,22 +47,26 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _projectService.TDeleteAsync(project);
             return Ok(new { message = "Proje başarıyla silindi!" });
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAllProjects()
+        [HttpGet("detailed")]
+        public async Task<IActionResult> GetAllDetailed()
         {
-            var projects = await _projectService.GetAllProjectDetailsAsync();
-            return Ok(projects);
+            var result = await _projectService.GetAllDetailedProjectsAsync();
+            return Ok(result);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProjectById(int id)
+        public async Task<IActionResult> GetProjectDetailById(int id)
         {
-            var project = await _projectService.GetProjectDetailByIdAsync(id);
+            var project = await _projectService.GetProjectByIdWithIncludeAsync(id);
             if (project == null)
-                return NotFound("Proje bulunamadı!");
+                return NotFound("Proje bulunamadı.");
 
-            return Ok(project);
+            var dto = _mapper.Map<ResultProjectDto>(project);
+            return Ok(dto);
         }
-        
+
+
+
+
 
     }
 }

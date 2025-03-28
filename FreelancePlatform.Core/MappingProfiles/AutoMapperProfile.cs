@@ -25,7 +25,9 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<CreateUserDto, User>();
             CreateMap<UpdateUserDto, User>();
 
-            CreateMap<Project, ResultProjectDto>().ReverseMap();
+            CreateMap<Project, ResultProjectDto>()
+             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+             .ForMember(dest => dest.EmployerFullName, opt => opt.MapFrom(src => src.Employer.FirstName + " " + src.Employer.LastName));
             CreateMap<CreateProjectDto, Project>();
             CreateMap<UpdateProjectDto, Project>();
 

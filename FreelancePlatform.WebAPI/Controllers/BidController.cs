@@ -40,22 +40,7 @@ namespace FreelancePlatform.WebAPI.Controllers
         }
 
         // ✅ Belirli projeye ait teklifleri getir
-        [HttpGet("project/{projectId}")]
-        public async Task<IActionResult> GetBidsByProjectId(int projectId)
-        {
-            var bids = await _bidService.GetBidsByProjectIdAsync(projectId);
-            var resultDtos = _mapper.Map<List<ResultBidDto>>(bids);
-            return Ok(resultDtos);
-        }
-
-        // ✅ Belirli freelancer'a ait teklifleri getir
-        [HttpGet("freelancer/{freelancerId}")]
-        public async Task<IActionResult> GetBidsByFreelancerId(int freelancerId)
-        {
-            var bids = await _bidService.GetBidsByFreelancerIdAsync(freelancerId);
-            var resultDtos = _mapper.Map<List<ResultBidWithProjectDto>>(bids);
-            return Ok(resultDtos);
-        }
+       
 
         // ✅ Teklif oluştur
         [HttpPost]
@@ -91,25 +76,7 @@ namespace FreelancePlatform.WebAPI.Controllers
         }
      
 
-        [HttpPost("accept/{bidId}")]
-        public async Task<IActionResult> AcceptBid(int bidId)
-        {
-            await _bidService.AcceptBidAsync(bidId);
-            return Ok(new { message = "Teklif kabul edildi!" });
-        }
-        [HttpGet("by-employer/{employerId}")]
-        public async Task<IActionResult> GetBidsByEmployer(int employerId)
-        {
-            var bids = await _bidService.GetBidsByEmployerIdAsync(employerId);
-            return Ok(bids);
-        }
-        [HttpPost("add")]
-        public async Task<IActionResult> Add([FromBody] CreateBidDto dto)
-        {
-            var bid = _mapper.Map<Bid>(dto); // ✔️ MAP BURADA
-            await _bidService.AddBidAsync(bid);
-            return Ok(new { message = "Teklif başarıyla eklendi." });
-        }
+        
 
     }
 }
