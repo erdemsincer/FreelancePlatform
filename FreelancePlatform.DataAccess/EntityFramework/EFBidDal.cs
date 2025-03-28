@@ -22,37 +22,40 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .ToListAsync();
         }
 
-        public async Task<List<Bid>> GetBidsByFreelancerIdAsync(int freelancerId)
+        public async Task<List<ResultBidWithProjectDto>> GetBidsByFreelancerIdAsync(int freelancerId)
         {
             return await _context.Bids
-                .Include(b => b.Project)
                 .Where(b => b.FreelancerId == freelancerId)
+                .Include(b => b.Project)
+                .Include(b => b.Freelancer)
+                .Select(b => new ResultBidWithProjectDto
+                {
+                    BidId = b.Id,
+                    ProjectId = b.ProjectId,
+                    ProjectTitle = b.Project.Title,
+                    FreelancerId = b.FreelancerId,
+                    FreelancerName = b.Freelancer.FirstName + " " + b.Freelancer.LastName,
+                    OfferAmount = b.OfferAmount,
+                    Message = b.Message,
+                    CreatedAt = b.CreatedAt,
+                    ProjectStatus = b.Project.Status
+                })
                 .ToListAsync();
         }
-        public async Task AddBidAndUpdateProjectStatusAsync(Bid bid)
-        {
-            await _context.Bids.AddAsync(bid);
 
-            var project = await _context.Projects.FindAsync(bid.ProjectId);
-            if (project != null && project.Status == "Açık")
-            {
-                project.Status = "Teklif Alınıyor";
-                _context.Projects.Update(project);
-            }
-
-            await _context.SaveChangesAsync();
-        }
+       
         public async Task AcceptBidAsync(int bidId)
         {
-            var bid = await _context.Bids.FindAsync(bidId);
-            if (bid == null) throw new Exception("Teklif bulunamadı!");
+            var bid = await _context.Bids
+                .Include(x => x.Project)
+                .FirstOrDefaultAsync(x => x.Id == bidId);
 
-            var project = await _context.Projects.FindAsync(bid.ProjectId);
-            if (project == null) throw new Exception("Proje bulunamadı!");
-
-            project.Status = "Kabul Edildi";
-            _context.Projects.Update(project);
-            await _context.SaveChangesAsync();
+            if (bid != null)
+            {
+                bid.Status = "Kabul Edildi";
+                bid.Project.Status = "Alındı";
+                await _context.SaveChangesAsync();
+            }
         }
         public async Task<List<ResultBidWithProjectDto>> GetBidsByEmployerIdAsync(int employerId)
         {
@@ -65,7 +68,7 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                     BidId = b.Id,
                     ProjectId = b.ProjectId,
                     ProjectTitle = b.Project.Title,
-                     FreelancerId= b.FreelancerId,
+                    FreelancerId= b.FreelancerId,
                     FreelancerName = b.Freelancer.FirstName + " " + b.Freelancer.LastName,
                     OfferAmount = b.OfferAmount,
                     Message = b.Message,
