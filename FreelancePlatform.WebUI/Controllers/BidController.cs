@@ -1,6 +1,7 @@
 ﻿using FreelancePlatform.Core.DTOs.BidDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace FreelancePlatform.WebUI.Controllers
@@ -33,7 +34,8 @@ namespace FreelancePlatform.WebUI.Controllers
 
             var dto = new CreateBidDto
             {
-                ProjectId = projectId
+                ProjectId = projectId,
+                FreelancerId = userId.Value
             };
 
             return View(dto);
@@ -54,22 +56,21 @@ namespace FreelancePlatform.WebUI.Controllers
             dto.FreelancerId = userId.Value;
 
             var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var jsonData = JsonConvert.SerializeObject(dto);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://localhost:7085/api/Bid", content);
+            var response = await client.PostAsync("https://localhost:7085/api/Bid/add", content);
 
             if (response.IsSuccessStatusCode)
             {
-                TempData["success"] = "Teklifiniz başarıyla gönderildi!";
+                TempData["success"] = "Teklif başarıyla gönderildi!";
                 return RedirectToAction("Detail", "Project", new { id = dto.ProjectId });
             }
 
             TempData["error"] = "Teklif gönderilirken bir hata oluştu.";
-            return RedirectToAction("Detail", "Project", new { id = dto.ProjectId });
+            return View(dto);
         }
     }
 }

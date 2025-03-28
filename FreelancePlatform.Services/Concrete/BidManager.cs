@@ -57,6 +57,11 @@ namespace FreelancePlatform.Services.Concrete
         {
             return await _bidDal.GetBidsByEmployerIdAsync(employerId);
         }
+        public async Task AddBidAsync(Bid bid)
+        {
+            bid.CreatedAt = DateTime.UtcNow;
+            await _bidDal.AddAsync(bid);
+        }
 
     }
 }

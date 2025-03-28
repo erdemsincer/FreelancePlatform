@@ -13,47 +13,51 @@
         <div class="card-body p-4">
             @if (!Model.Any())
             {
-                    <div class="alert alert-info text-center">Bu projeye henüz teklif gelmemiş.</div>
+                <div class="alert alert-info text-center">Bu projeye henüz teklif gelmemiş.</div>
             }
             else
             {
-                    <div class="table-responsive">
-                        <table class="table table-hover text-center align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>👤 Freelancer</th>
-                                    <th>💰 Tutar</th>
-                                    <th>📝 Mesaj</th>
-                                    <th>📅 Tarih</th>
-                                    <th>✅ İşlem</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                <div class="table-responsive">
+                    <table class="table table-hover text-center align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>👤 Freelancer</th>
+                                <th>💰 Tutar</th>
+                                <th>📝 Mesaj</th>
+                                <th>📅 Tarih</th>
+                                <th>✅ İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @foreach (var bid in Model)
                             {
-                                        <tr>
-                                            <td class="fw-semibold">@bid.FreelancerName</td>
-                                            <td class="text-success fw-bold">@bid.OfferAmount ₺</td>
-                                            <td class="text-muted text-truncate" style="max-width: 200px;">@bid.Message</td>
-                                            <td class="text-secondary">@bid.CreatedAt.ToString("dd.MM.yyyy")</td>
-                                            <td>
-                                        @if (bid.IsAccepted)
+                                <tr>
+                                    <td class="fw-semibold">@bid.FreelancerName</td>
+                                    <td class="text-success fw-bold">@bid.OfferAmount ₺</td>
+                                    <td class="text-muted text-truncate" style="max-width: 200px;">@bid.Message</td>
+                                    <td class="text-secondary">@bid.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        @switch (bid.ProjectStatus)
                                         {
-                                                        <span class="badge bg-success">Kabul Edildi</span>
+                                            case "Alındı":
+                                                <button class="btn btn-sm btn-success" disabled>Kabul Edildi</button>
+                                                break;
+                                            case "Tamamlandı":
+                                                <button class="btn btn-sm btn-secondary" disabled>Tamamlandı</button>
+                                                break;
+                                            default:
+                                                <form method="post" asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer">
+                                                    <input type="hidden" name="bidId" value="@bid.BidId" />
+                                                    <button type="submit" class="btn btn-sm btn-primary">Kabul Et</button>
+                                                </form>
+                                                break;
                                         }
-                                        else
-                                        {
-                                            <form method="post" asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer">
-                                                            <input type="hidden" name="bidId" value="@bid.BidId" />
-                                                            <button type="submit" class="btn btn-sm btn-primary">Kabul Et</button>
-                                                        </form>
-                                        }
-                                            </td>
-                                        </tr>
+                                    </td>
+                                </tr>
                             }
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
     </div>
@@ -66,7 +70,7 @@
         white-space: nowrap;
     }
 
-    .btn-primary {
+    .btn-primary, .btn-success, .btn-secondary {
         border-radius: 20px;
         padding: 5px 15px;
     }

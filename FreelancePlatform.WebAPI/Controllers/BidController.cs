@@ -63,7 +63,7 @@ namespace FreelancePlatform.WebAPI.Controllers
         {
             var bid = _mapper.Map<Bid>(dto);
             bid.CreatedAt = DateTime.UtcNow;
-            await _bidService.AddBidAndUpdateProjectStatusAsync(bid);
+            await _bidService.TAddAsync(bid);
             return Ok(new { message = "Teklif başarıyla eklendi!" });
         }
 
@@ -89,14 +89,7 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _bidService.TDeleteAsync(bid);
             return Ok(new { message = "Teklif başarıyla silindi!" });
         }
-        [HttpPost("add")]
-        public async Task<IActionResult> AddBid([FromBody] CreateBidDto dto)
-        {
-            var bid = _mapper.Map<Bid>(dto);
-            bid.CreatedAt = DateTime.UtcNow;
-            await _bidService.AddBidAndUpdateProjectStatusAsync(bid);
-            return Ok(new { message = "Teklif verildi ve proje durumu güncellendi." });
-        }
+     
 
         [HttpPost("accept/{bidId}")]
         public async Task<IActionResult> AcceptBid(int bidId)
@@ -109,6 +102,13 @@ namespace FreelancePlatform.WebAPI.Controllers
         {
             var bids = await _bidService.GetBidsByEmployerIdAsync(employerId);
             return Ok(bids);
+        }
+        [HttpPost("add")]
+        public async Task<IActionResult> Add([FromBody] CreateBidDto dto)
+        {
+            var bid = _mapper.Map<Bid>(dto); // ✔️ MAP BURADA
+            await _bidService.AddBidAsync(bid);
+            return Ok(new { message = "Teklif başarıyla eklendi." });
         }
 
     }

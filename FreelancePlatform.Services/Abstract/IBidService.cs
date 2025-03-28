@@ -9,6 +9,7 @@ namespace FreelancePlatform.Services.Abstract
         Task<List<ResultBidWithProjectDto>> GetBidsByFreelancerIdAsync(int freelancerId);
         Task AcceptBidAsync(int bidId);
         Task<List<ResultBidWithProjectDto>> GetBidsByEmployerIdAsync(int employerId);
+        Task AddBidAsync(Bid bid);
 
     }
 }
