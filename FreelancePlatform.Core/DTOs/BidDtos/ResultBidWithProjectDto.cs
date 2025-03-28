@@ -16,6 +16,7 @@ namespace FreelancePlatform.Core.DTOs.BidDtos
         public decimal OfferAmount { get; set; }
         public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
-        public bool IsAccepted { get; set; }
+        public bool IsAccepted { get; set; } // Teklif durumu
+        public string ProjectStatus { get; set; } // Proje durumu (Açık, Alındı, Tamamlandı)
     }
 }
