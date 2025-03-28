@@ -28,6 +28,25 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Include(b => b.Project)
                 .FirstOrDefaultAsync(b => b.Id == bidId);
         }
+        public async Task<List<ResultBidWithProjectDto>> GetBidsByFreelancerIdAsync(int freelancerId)
+        {
+            return await _context.Bids
+                .Where(b => b.FreelancerId == freelancerId)
+                .Include(b => b.Project)
+                .Select(b => new ResultBidWithProjectDto
+                {
+                    BidId = b.Id,
+                    ProjectId = b.ProjectId,
+                    ProjectTitle = b.Project.Title,
+                    FreelancerId = b.FreelancerId,
+                    OfferAmount = b.OfferAmount,
+                    Message = b.Message,
+                    CreatedAt = b.CreatedAt,
+                    ProjectStatus = b.Project.Status
+                })
+                .ToListAsync();
+        }
+
 
 
 

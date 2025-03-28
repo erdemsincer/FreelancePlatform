@@ -90,6 +90,13 @@ namespace FreelancePlatform.WebAPI.Controllers
 
             return Ok("Teklif başarıyla kabul edildi.");
         }
+        [HttpGet("freelancer/{freelancerId}")]
+        public async Task<IActionResult> GetBidsByFreelancer(int freelancerId)
+        {
+            var result = await _bidService.GetBidsByFreelancerIdAsync(freelancerId);
+            return Ok(result);
+        }
+
 
 
 

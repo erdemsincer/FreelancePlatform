@@ -7,6 +7,8 @@ namespace FreelancePlatform.DataAccess.Abstract
     {
         Task<List<Bid>> GetBidsByEmployerIdAsync(int employerId);
         Task<Bid> GetBidWithProjectAsync(int bidId);
+        Task<List<ResultBidWithProjectDto>> GetBidsByFreelancerIdAsync(int freelancerId);
+
 
 
 

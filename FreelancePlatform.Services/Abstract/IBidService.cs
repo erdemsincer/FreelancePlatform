@@ -8,6 +8,8 @@ namespace FreelancePlatform.Services.Abstract
 
         Task<List<Bid>> GetBidsByEmployerIdAsync(int employerId);
         Task<bool> AcceptBidAsync(int bidId);
+        public Task<List<ResultBidWithProjectDto>> GetBidsByFreelancerIdAsync(int freelancerId);
+
 
 
     }
