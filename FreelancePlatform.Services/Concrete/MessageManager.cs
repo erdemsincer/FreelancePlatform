@@ -1,4 +1,5 @@
-﻿using FreelancePlatform.Core.Entities;
+﻿using FreelancePlatform.Core.DTOs.MessageDtos;
+using FreelancePlatform.Core.Entities;
 using FreelancePlatform.DataAccess.Abstract;
 using FreelancePlatform.Services.Abstract;
 
@@ -37,5 +38,11 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _messageDal.UpdateAsync(entity);
         }
+        public async Task<List<Message>> GetConversationAsync(int user1Id, int user2Id)
+        {
+            return await _messageDal.GetMessagesBetweenUsersAsync(user1Id, user2Id);
+        }
+
+
     }
 }

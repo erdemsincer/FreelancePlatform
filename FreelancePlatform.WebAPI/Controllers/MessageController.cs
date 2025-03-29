@@ -39,15 +39,8 @@ namespace FreelancePlatform.WebAPI.Controllers
             return Ok(resultDto);
         }
 
-        // ✅ Mesaj gönder
-        [HttpPost]
-        public async Task<IActionResult> SendMessage([FromBody] CreateMessageDto dto)
-        {
-            var message = _mapper.Map<Message>(dto);
-            message.SentAt = DateTime.UtcNow;
-            await _messageService.TAddAsync(message);
-            return Ok(new { message = "Mesaj başarıyla gönderildi!" });
-        }
+       
+    
 
         // ✅ Mesaj sil
         [HttpDelete("{id}")]
@@ -59,5 +52,23 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _messageService.TDeleteAsync(message);
             return Ok(new { message = "Mesaj başarıyla silindi!" });
         }
+
+        [HttpGet("conversation/{user1Id}/{user2Id}")]
+        public async Task<IActionResult> GetConversation(int user1Id, int user2Id)
+        {
+            var messages = await _messageService.GetConversationAsync(user1Id, user2Id);
+            var result = _mapper.Map<List<ResultMessageDto>>(messages);
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SendMessage([FromBody] CreateMessageDto dto)
+        {
+            var message = _mapper.Map<Message>(dto);
+            message.SentAt = DateTime.UtcNow;
+            await _messageService.TAddAsync(message);
+            return Ok();
+        }
+
+
     }
 }
