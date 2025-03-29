@@ -23,6 +23,7 @@
                             <th>📝 Mesaj</th>
                             <th>📅 Tarih</th>
                             <th>📦 Durum</th>
+                            <th>✉️ Mesaj</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,15 @@
                                     {
                                         <span class="badge bg-secondary">@bid.ProjectStatus</span>
                                     }
+                                </td>
+                                <td>
+                                    <a asp-action="Chat"
+                                       asp-controller="Message"
+                                       asp-area="Freelancer"
+                                       asp-route-receiverId="@bid.EmployerId"
+                                       class="btn btn-sm btn-outline-secondary rounded-pill">
+                                        <i class="bi bi-chat-dots"></i> Mesaj Gönder
+                                    </a>
                                 </td>
                             </tr>
                         }
