@@ -38,6 +38,7 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                     BidId = b.Id,
                     ProjectId = b.ProjectId,
                     ProjectTitle = b.Project.Title,
+                    EmployerId = b.Project.EmployerId,
                     FreelancerId = b.FreelancerId,
                     OfferAmount = b.OfferAmount,
                     Message = b.Message,

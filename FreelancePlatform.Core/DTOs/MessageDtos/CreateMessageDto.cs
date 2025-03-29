@@ -5,5 +5,6 @@
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
         public string Content { get; set; }
+        public List<ResultMessageDto> PreviousMessages { get; set; } = new();
     }
 }

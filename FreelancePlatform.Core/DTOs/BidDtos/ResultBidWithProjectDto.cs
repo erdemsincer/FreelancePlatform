@@ -12,6 +12,7 @@ namespace FreelancePlatform.Core.DTOs.BidDtos
         public int ProjectId { get; set; }
         public string ProjectTitle { get; set; }
         public int FreelancerId { get; set; }
+        public int EmployerId { get; set; }
         public string FreelancerName { get; set; }
         public decimal OfferAmount { get; set; }
         public string Message { get; set; }

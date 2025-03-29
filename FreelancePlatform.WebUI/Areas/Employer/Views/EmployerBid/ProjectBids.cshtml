@@ -48,12 +48,20 @@
                                     }
                                     else
                                     {
-                                        <form asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer" method="post">
+                                        <form asp-action="AcceptBid" asp-controller="EmployerBid" asp-area="Employer" method="post" class="d-inline">
                                             <input type="hidden" name="bidId" value="@bid.BidId" />
-                                            <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill">Kabul Et</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill me-2">Kabul Et</button>
                                         </form>
-
                                     }
+
+                                    <!-- ✉️ Mesaj Gönder Butonu -->
+                                    <a asp-action="SendMessage"
+                                       asp-controller="Message"
+                                       asp-area="Employer"
+                                       asp-route-receiverId="@bid.FreelancerId"
+                                       class="btn btn-sm btn-outline-secondary rounded-pill">
+                                        <i class="bi bi-chat-dots"></i> Mesaj Gönder
+                                    </a>
                                 </td>
                             </tr>
                         }
