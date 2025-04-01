@@ -13,6 +13,11 @@ namespace FreelancePlatform.Services.Concrete
     {
         private readonly ICategoryDal _categoryDal;
 
+        public CategoryManager(ICategoryDal categoryDal)
+        {
+            _categoryDal = categoryDal;
+        }
+
         public async Task TAddAsync(Category entity)
         {
             await _categoryDal.AddAsync(entity);

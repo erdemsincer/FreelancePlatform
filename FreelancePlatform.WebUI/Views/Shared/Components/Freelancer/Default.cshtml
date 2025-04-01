@@ -1,33 +1,33 @@
 ﻿@model List<FreelancePlatform.Core.DTOs.UserDtos.ResultUserDto>
 
-<section class="freelancer-list-section text-center py-5" style="background-color: #f9fbfd;">
+<section class="freelancer-list-section py-5" style="background: linear-gradient(to right, #f8f9fa, #edf1f5);">
     <div class="container">
-        <h2 class="fw-bold">Bionluk <span style="color: #0d6efd;">Freelancerları</span></h2>
-        <p class="text-muted mb-5">Kendi alanlarında uzman, özenle seçilmiş freelancerlarımızla tanışın.</p>
+        <h2 class="fw-bold display-6 mb-2"><i class="bi bi-stars text-warning me-2"></i> En Sevilen <span class="text-primary">Freelancerlar</span> 🥰</h2>
+        <p class="text-muted mb-5">En çok tercih edilen freelancerlarımızla tanışın.</p>
 
-        <div class="row g-4">
-            @foreach (var user in Model.Take(4))
+        <div class="d-flex overflow-auto gap-4 pb-2">
+            @foreach (var user in Model.Take(10))
             {
-                <div class="col-md-3 col-sm-6">
-                    <div class="card shadow-sm border-0 h-100 rounded-4">
-                        <div style="height: 200px; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                            <img src="@user.ProfileImageUrl" class="w-100 h-100 object-fit-cover" alt="@user.FirstName @user.LastName">
-                        </div>
-                        <div class="card-body text-start">
-                            <h5 class="fw-bold mb-1">@user.FirstName @user.LastName</h5>
-                            <p class="text-secondary small mb-1">Üye Olduğu Tarih: @user.CreatedAt.ToString("dd.MM.yyyy")</p>
-                            <p class="text-muted small">@user.Email</p>
-                        </div>
-                        <div class="card-footer bg-white border-0 d-flex gap-2 justify-content-between">
-                            <a href="/Users/Detail/@user.Id" class="btn btn-outline-primary btn-sm w-50 rounded-pill">Profili Gör</a>
-                            <a href="/Messages/Send?userId=@user.Id" class="btn btn-outline-dark btn-sm w-50 rounded-pill">Mesaj Gönder</a>
-                        </div>
+                <div class="flex-shrink-0 bg-white rounded-4 shadow-sm text-center p-4" style="width: 240px;">
+                    <div class="mb-3">
+                        <img src="@user.ProfileImageUrl" class="rounded-circle border object-fit-cover" style="width: 80px; height: 80px;" alt="@user.FirstName @user.LastName">
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">@user.FirstName @user.LastName</h6>
+                    <p class="text-muted small mb-2">@user.Email</p>
+                    <span class="badge bg-primary-subtle text-primary small mb-2">Üyelik: @user.CreatedAt.ToString("dd.MM.yyyy")</span>
+                    <div class="d-flex justify-content-between mt-3 gap-2">
+                        <a href="/Users/Detail/@user.Id" class="btn btn-sm btn-outline-primary w-50 rounded-pill">Profil</a>
+                        <a href="/Messages/Send?userId=@user.Id" class="btn btn-sm btn-outline-dark w-50 rounded-pill">Mesaj</a>
                     </div>
                 </div>
             }
         </div>
 
-        <a href="/Users" class="btn btn-outline-dark mt-4 rounded-pill px-4 py-2">Tüm Freelancerları Gör</a>
+        <div class="text-center mt-4">
+            <a href="/Users" class="btn btn-outline-dark rounded-pill px-4">
+                <i class="bi bi-people"></i> Tüm Freelancerları Gör
+            </a>
+        </div>
     </div>
 </section>
 
@@ -36,17 +36,23 @@
         object-fit: cover;
     }
 
-    .card:hover {
-        transform: translateY(-4px);
-        transition: 0.3s;
+    .freelancer-list-section .overflow-auto::-webkit-scrollbar {
+        height: 6px;
     }
 
-    .card-body h5 {
-        color: #212529;
+    .freelancer-list-section .overflow-auto::-webkit-scrollbar-thumb {
+        background-color: #dee2e6;
+        border-radius: 10px;
     }
 
-    .freelancer-list-section a.btn {
-        font-size: 0.9rem;
-        font-weight: 500;
+    .freelancer-list-section .overflow-auto::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .freelancer-list-section .btn:hover {
+        transform: scale(1.02);
+        transition: 0.2s;
     }
 </style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
