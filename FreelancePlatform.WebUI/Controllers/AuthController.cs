@@ -33,10 +33,9 @@ namespace FreelancePlatform.WebUI.Controllers
                 var responseBody = await response.Content.ReadAsStringAsync();
                 var tokenObj = JsonConvert.DeserializeObject<TokenResponseDto>(responseBody);
 
-                // 1. Token'ı Session'a kaydet
+                // Token ve userId
                 HttpContext.Session.SetString("token", tokenObj.Token);
 
-                // 2. Token'dan UserId'yi çözümle
                 var handler = new JwtSecurityTokenHandler();
                 var token = handler.ReadJwtToken(tokenObj.Token);
 
@@ -48,14 +47,20 @@ namespace FreelancePlatform.WebUI.Controllers
                     HttpContext.Session.SetInt32("userId", int.Parse(userIdClaim.Value));
                 }
 
-                // 3. Giriş başarılı -> yönlendir
+                // 👇 Kullanıcı adını Session'a ekle
+                if (!string.IsNullOrEmpty(tokenObj.Username))
+                {
+                    HttpContext.Session.SetString("userFullName", tokenObj.Username);
+                }
+
                 return RedirectToAction("Index", "Home");
             }
 
-            // Hatalı giriş
             ViewBag.Error = "Hatalı giriş bilgileri!";
             return View(model);
         }
+
+
 
 
         [HttpGet]
@@ -73,12 +78,17 @@ namespace FreelancePlatform.WebUI.Controllers
             var response = await _httpClient.PostAsync("Auth/Register", content);
             if (response.IsSuccessStatusCode)
             {
-                // Kayıt başarılıysa login sayfasına yönlendir
                 return RedirectToAction("Login");
             }
 
             ViewBag.Error = "Kayıt başarısız!";
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Auth");
         }
     }
 }
