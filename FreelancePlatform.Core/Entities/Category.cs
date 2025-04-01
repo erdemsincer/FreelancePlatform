@@ -7,5 +7,8 @@
         public string Description { get; set; }
 
         public ICollection<Project> Projects { get; set; }
+        // User.cs
+        public ICollection<Advertisement> Advertisements { get; set; }
+
     }
 }

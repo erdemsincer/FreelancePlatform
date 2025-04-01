@@ -17,5 +17,8 @@
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<UserSkill> UserSkills { get; set; }
+        // Category.cs
+        public ICollection<Advertisement> Advertisements { get; set; }
+
     }
 }
