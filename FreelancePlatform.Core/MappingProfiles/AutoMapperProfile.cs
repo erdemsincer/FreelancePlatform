@@ -14,6 +14,7 @@ using FreelancePlatform.Core.DTOs.UserSkillDtos;
 using FreelancePlatform.Core.DTOs.RoleDtos;
 using FreelancePlatform.Core.DTOs.UserRoleDtos;
 using FreelancePlatform.Core.DTOs.ProjectTaskDtos;
+using FreelancePlatform.Core.DTOs.AdvertisementDtos;
 
 namespace FreelancePlatform.Core.MappingProfiles
 {
@@ -81,6 +82,16 @@ namespace FreelancePlatform.Core.MappingProfiles
      .ForMember(dest => dest.ProjectStatus, opt => opt.MapFrom(src => src.Project.Status))
      .ForMember(dest => dest.FreelancerName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName));
 
+            CreateMap<CreateAdvertisementDto, Advertisement>();
+
+            // Update
+            CreateMap<UpdateAdvertisementDto, Advertisement>();
+            CreateMap<Advertisement, UpdateAdvertisementDto>();
+
+            // Result
+            CreateMap<Advertisement, ResultAdvertisementDto>()
+                .ForMember(dest => dest.FreelancerFullName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
         }
     }
 }

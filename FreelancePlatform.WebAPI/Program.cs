@@ -46,6 +46,9 @@ builder.Services.AddScoped<IUserRoleDal, EFUserRoleDal>();
 builder.Services.AddScoped<IUserRoleService, UserRoleManager>();
 builder.Services.AddScoped<IProjectTaskDal, EFProjectTaskDal>();
 builder.Services.AddScoped<IProjectTaskService, ProjectTaskManager>();
+builder.Services.AddScoped<IAdvertisementDal, EFAdvertisementDal>();
+builder.Services.AddScoped<IAdvertisementService, AdvertisementManager>();
+
 
 // JWT Config ve TokenHelper
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtSettings"));

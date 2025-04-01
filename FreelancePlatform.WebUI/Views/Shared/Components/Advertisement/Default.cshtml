@@ -1,0 +1,53 @@
+﻿@model List<FreelancePlatform.Core.DTOs.AdvertisementDtos.ResultAdvertisementDto>
+
+<section class="py-5" style="background-color: #f9fbfd;">
+    <div class="container">
+        <h2 class="fw-bold mb-4 display-6">
+            <i class="bi bi-lightbulb text-warning me-2"></i> İlham Verici <span class="text-primary">İlanlar</span>
+        </h2>
+
+        <div class="d-flex overflow-auto gap-4 pb-3">
+            @foreach (var ad in Model.Take(4))
+            {
+                <div class="flex-shrink-0 rounded-4 shadow-sm bg-white" style="width: 280px;">
+                    <div class="p-3 border-bottom">
+                        <h5 class="fw-bold text-dark mb-1">@ad.Title</h5>
+                        <p class="text-muted small mb-0">@ad.FreelancerFullName</p>
+                        <p class="text-muted small mb-0">@ad.CategoryName</p>
+                    </div>
+                    <div class="p-3">
+                        <p class="small text-dark" style="min-height: 60px;">
+                            @ad.Description.Substring(0, Math.Min(ad.Description.Length, 80))...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="fw-bold text-success">@ad.Price ₺</span>
+                            <a href="/Advertisements/Detail/@ad.Id" class="btn btn-sm btn-outline-primary rounded-pill">Detay</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .overflow-auto::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .overflow-auto::-webkit-scrollbar-thumb {
+        background-color: #ced4da;
+        border-radius: 10px;
+    }
+
+    .overflow-auto::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .btn:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">

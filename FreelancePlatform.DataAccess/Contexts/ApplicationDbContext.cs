@@ -21,6 +21,8 @@ namespace FreelancePlatform.DataAccess.Contexts
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
