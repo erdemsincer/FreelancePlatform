@@ -37,5 +37,9 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _projectTaskDal.UpdateAsync(entity);
         }
+        public async Task<List<ProjectTask>> GetTasksByProjectIdAsync(int projectId)
+        {
+            return await _projectTaskDal.GetTasksByProjectIdAsync(projectId);
+        }
     }
 }

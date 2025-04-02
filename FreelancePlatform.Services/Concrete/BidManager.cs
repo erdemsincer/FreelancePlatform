@@ -49,7 +49,7 @@ namespace FreelancePlatform.Services.Concrete
                 return false;
 
             bid.Project.Status = "Alındı";
-
+            bid.Status = "Kabul Edildi";
             await _bidDal.UpdateAsync(bid);
             return true;
         }
