@@ -47,5 +47,31 @@ namespace FreelancePlatform.WebUI.Areas.Employer.Controllers
 
             return RedirectToAction("ProjectBids");
         }
+        [HttpGet]
+        public async Task<IActionResult> AcceptedBids()
+        {
+            var employerId = HttpContext.Session.GetInt32("userId");
+            var token = HttpContext.Session.GetString("token");
+
+            if (employerId == null || string.IsNullOrEmpty(token))
+                return RedirectToAction("Login", "Auth");
+
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync($"https://localhost:7085/api/Bid/bids/employer/{employerId}");
+
+            if (!response.IsSuccessStatusCode)
+                return View(new List<ResultBidWithProjectDto>());
+
+            var json = await response.Content.ReadAsStringAsync();
+            var allBids = JsonConvert.DeserializeObject<List<ResultBidWithProjectDto>>(json);
+
+            // ✅ Sadece kabul edilmiş teklifler
+            var acceptedBids = allBids.Where(x => x.ProjectStatus == "Alındı").ToList();
+
+            return View(acceptedBids);
+        }
+
     }
 }

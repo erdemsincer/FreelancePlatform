@@ -87,9 +87,14 @@
                 <i class="bi bi-list-check me-2"></i> Projelerim
             </a>
 
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "EmployerBid" ? "active" : "")"
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "EmployerBid" && ViewContext.RouteData.Values["action"]?.ToString() == "ProjectBids" ? "active" : "")"
                asp-area="Employer" asp-controller="EmployerBid" asp-action="ProjectBids">
                 <i class="bi bi-inbox-fill me-2"></i> Gelen Teklifler
+            </a>
+
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "EmployerBid" && ViewContext.RouteData.Values["action"]?.ToString() == "AcceptedBids" ? "active" : "")"
+               asp-area="Employer" asp-controller="EmployerBid" asp-action="AcceptedBids">
+                <i class="bi bi-check2-circle me-2"></i> Kabul Edilen Teklifler
             </a>
 
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "EmployerMessage" ? "active" : "")"
@@ -107,6 +112,7 @@
                 <i class="bi bi-box-arrow-right me-2"></i> Çıkış Yap
             </a>
         </nav>
+
     </div>
 
     <!-- Main Content -->
