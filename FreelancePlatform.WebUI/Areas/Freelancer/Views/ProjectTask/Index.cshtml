@@ -1,0 +1,99 @@
+﻿@model List<FreelancePlatform.Core.DTOs.ProjectTaskDtos.ResultProjectTaskDto>
+@{
+    ViewData["Title"] = "Proje Görevleri";
+    Layout = "~/Areas/Freelancer/Views/FreelancerLayout/Index.cshtml";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0">
+                <i class="bi bi-kanban-fill text-primary me-2"></i> Proje Görevleri
+            </h2>
+            <a class="btn btn-success btn-sm rounded-pill px-4"
+               asp-action="Create" asp-route-projectId="@ViewBag.ProjectId">
+                <i class="bi bi-plus-circle me-1"></i> Yeni Görev Ekle
+            </a>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center shadow-sm rounded-4 py-4">
+                <i class="bi bi-exclamation-circle me-2"></i> Bu projeye henüz görev eklenmemiş.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm rounded-4 overflow-hidden">
+                    <thead class="table-dark text-white">
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Durum</th>
+                            <th>Güncelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model)
+                        {
+                            <tr class="task-row">
+                                <td class="text-secondary">@task.Id</td>
+                                <td class="fw-semibold text-dark">@task.Title</td>
+                                <td class="text-muted">@task.Description</td>
+                                <td>
+                                    <span class="badge bg-@(task.Status == "Done" ? "success" : task.Status == "InProgress" ? "warning text-dark" : "secondary") px-3 py-2">
+                                        <i class="bi bi-@(task.Status == "Done" ? "check-circle" : task.Status == "InProgress" ? "clock-history" : "circle") me-1"></i> @task.Status
+                                    </span>
+                                </td>
+                                <td>
+                                    <form asp-action="UpdateStatus" method="post" class="d-flex justify-content-center gap-2">
+                                        <input type="hidden" name="taskId" value="@task.Id" />
+                                        <input type="hidden" name="projectId" value="@ViewBag.ProjectId" />
+                                        <select name="newStatus" class="form-select form-select-sm w-auto rounded-pill">
+                                            <option value="ToDo" selected="@(task.Status == "ToDo")">To Do</option>
+                                            <option value="InProgress" selected="@(task.Status == "InProgress")">In Progress</option>
+                                            <option value="Done" selected="@(task.Status == "Done")">Done</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Stil -->
+<style>
+    .table th, .table td {
+        vertical-align: middle !important;
+    }
+
+    .task-row:hover {
+        background-color: #f1f3f5;
+        transition: background 0.3s ease;
+    }
+
+    select.form-select-sm {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
