@@ -45,12 +45,14 @@ namespace FreelancePlatform.WebUI.Areas.Employer.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                TempData["success"] = "Değerlendirme başarıyla yapıldı!";
-                return RedirectToAction("Index", "Dashboard", new { area = "Employer" });
+                TempData["success"] = "Değerlendirme başarıyla gönderildi!";
+                return RedirectToAction("AcceptedBids", "EmployerBid");
             }
 
             TempData["error"] = "Değerlendirme gönderilemedi!";
             return View(model);
         }
     }
+
 }
+

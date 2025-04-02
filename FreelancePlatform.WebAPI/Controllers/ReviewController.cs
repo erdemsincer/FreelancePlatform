@@ -43,10 +43,12 @@ namespace FreelancePlatform.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateReviewDto dto)
         {
+            if (dto == null || dto.ProjectId == 0 || dto.ReviewerId == 0 || dto.RevieweeId == 0)
+                return BadRequest("Eksik bilgi!");
+
             var review = _mapper.Map<Review>(dto);
-            
             await _reviewService.TAddAsync(review);
-            return Ok(new { message = "Değerlendirme başarıyla eklendi!" });
+            return Ok(new { message = "Yorum başarıyla eklendi." });
         }
 
         // ✅ Değerlendirme sil

@@ -52,7 +52,7 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<CreateNotificationDto, Notification>();
 
             CreateMap<Review, ResultReviewDto>().ReverseMap();
-            CreateMap<CreateReviewDto, Review>();
+            CreateMap<CreateReviewDto, Review>().ReverseMap();
 
             CreateMap<Attachment, ResultAttachmentDto>().ReverseMap();
             CreateMap<CreateAttachmentDto, Attachment>();
