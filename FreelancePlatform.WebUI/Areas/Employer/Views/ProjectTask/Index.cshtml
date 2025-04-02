@@ -1,0 +1,79 @@
+﻿@model List<FreelancePlatform.Core.DTOs.ProjectTaskDtos.ResultProjectTaskDto>
+@{
+    ViewData["Title"] = "Proje Görevleri";
+    Layout = "~/Areas/Employer/Views/EmployerLayout/Index.cshtml";
+}
+
+<section class="py-5" style="background: linear-gradient(to right, #f8f9fa, #e9ecef);">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0">
+                <i class="bi bi-kanban-fill text-primary me-2"></i> Proje Görevleri
+            </h2>
+            <a href="/Employer/Projects" class="btn btn-outline-dark rounded-pill px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Projelere Dön
+            </a>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center rounded-4 shadow-sm py-4">
+                <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+                Bu projeye ait henüz bir görev bulunmamaktadır.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive shadow rounded-4 overflow-hidden">
+                <table class="table table-hover align-middle text-center mb-0">
+                    <thead class="table-dark text-white">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Görev Başlığı</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model)
+                        {
+                            <tr class="bg-white">
+                                <td>@task.Id</td>
+                                <td class="fw-semibold">@task.Title</td>
+                                <td class="text-muted">@task.Description</td>
+                                <td>
+                                    <span class="badge bg-@(task.Status == "Done" ? "success" : task.Status == "InProgress" ? "warning text-dark" : "secondary") px-3 py-2">
+                                        <i class="bi bi-@(task.Status == "Done" ? "check-circle-fill" : task.Status == "InProgress" ? "hourglass-split" : "circle") me-1"></i>
+                                        @task.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f3f5;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+    }
+
+    .btn-outline-dark:hover {
+        background-color: #212529;
+        color: #fff;
+    }
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
