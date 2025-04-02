@@ -1,6 +1,6 @@
 ﻿@{
     var isLoggedIn = Context.Session.GetString("token") != null;
-    var fullName = Context.Session.GetString("userFullName");
+    var fullName = Context.Session.GetString("userFullName") ?? "Kullanıcı";
 }
 
 <!DOCTYPE html>
@@ -11,23 +11,31 @@
     <title>@ViewData["Title"] - Freelance Platform</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
     <style>
         body {
-            background-color: #f7f9fc;
+            background-color: #f4f6f9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar {
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #0d6efd !important;
         }
 
         .navbar-nav .nav-link {
             font-weight: 500;
-            margin-right: 15px;
-            transition: color 0.2s ease-in-out;
+            margin-right: 20px;
+            color: #495057;
+            transition: all 0.3s;
         }
 
         .navbar-nav .nav-link:hover {
@@ -36,47 +44,62 @@
 
         .btn-primary {
             border-radius: 30px;
-            padding: 6px 18px;
             transition: all 0.3s;
         }
 
-        .btn-primary:hover {
-            background-color: #0b5ed7;
+        .btn-outline-secondary:hover {
+            background-color: #0d6efd;
+            color: white;
         }
 
         footer {
             background-color: #212529;
-            color: #fff;
-            padding: 15px 0;
-            margin-top: 50px;
+            color: #ccc;
+            padding: 25px 0;
+            font-size: 0.9rem;
         }
 
         footer a {
             color: #adb5bd;
-            text-decoration: none;
+            margin: 0 10px;
         }
 
         footer a:hover {
             color: #fff;
         }
 
-       
-
         .toast {
-            animation: fadeInToast 0.5s ease forwards;
+            animation: fadeInToast 0.4s ease-in-out;
         }
+
+     
+
+        .user-badge {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
+    <!-- NAVBAR -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand fw-bold fs-4" href="/">
+                <a class="navbar-brand" href="/">
                     <i class="fa-solid fa-briefcase"></i> FreelancePlatform
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item">
@@ -86,18 +109,23 @@
                             <a class="nav-link" href="/Categories">Kategoriler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mesajlar</a>
+                            <a class="nav-link" href="/Messages">Mesajlar</a>
                         </li>
 
                         @if (isLoggedIn)
                         {
-                            <li class="nav-item">
-                                <span class="nav-link fw-bold text-primary">
-                                    👋 Merhaba, @fullName
-                                </span>
-                            </li>
-                            <li class="nav-item ms-2">
-                                <a class="btn btn-outline-secondary btn-sm" href="/Auth/Logout">Çıkış Yap</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
+                                    <div class="user-badge">
+                                        @fullName.Substring(0, 1)
+                                    </div>
+                                    <span>@fullName</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="/Profile">Profilim</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item text-danger" href="/Auth/Logout">Çıkış Yap</a></li>
+                                </ul>
                             </li>
                         }
                         else
@@ -115,10 +143,11 @@
         </nav>
     </header>
 
+    <!-- TOAST -->
     @if (TempData["success"] != null || TempData["error"] != null)
     {
         <div class="position-fixed bottom-0 end-0 p-4" style="z-index: 1055;">
-            <div class="toast show align-items-center text-white @((TempData["success"] != null) ? "bg-success" : "bg-danger") border-0" role="alert">
+            <div class="toast show align-items-center text-white @((TempData["success"] != null) ? "bg-success" : "bg-danger") border-0">
                 <div class="d-flex">
                     <div class="toast-body">
                         @TempData["success"] @TempData["error"]
@@ -129,22 +158,21 @@
         </div>
     }
 
-    <main class="container py-4">
+    <!-- BODY -->
+    <main class="container py-5">
         @RenderBody()
     </main>
 
+    <!-- FOOTER -->
     <footer class="text-center">
-        © @DateTime.Now.Year FreelancePlatform | <a href="#">İletişim</a> | <a href="#">Gizlilik Politikası</a>
+        <div>
+            © @DateTime.Now.Year FreelancePlatform | 
+            <a href="#">İletişim</a> | 
+            <a href="#">Gizlilik Politikası</a>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
-    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

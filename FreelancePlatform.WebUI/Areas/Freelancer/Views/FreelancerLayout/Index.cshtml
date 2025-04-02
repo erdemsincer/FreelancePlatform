@@ -14,8 +14,8 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
             overflow-x: hidden;
         }
 
@@ -25,14 +25,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #0d6efd;
+            background-color: #212529;
             color: white;
             z-index: 1000;
-            transition: all 0.3s;
         }
 
             .sidebar .logo {
-                background-color: #0b5ed7;
+                background-color: #1a1e21;
                 font-size: 1.4rem;
                 font-weight: bold;
                 padding: 20px;
@@ -40,17 +39,17 @@
             }
 
             .sidebar .nav-link {
-                color: rgba(255, 255, 255, 0.85);
-                padding: 15px 20px;
+                color: #adb5bd;
+                padding: 14px 20px;
                 font-weight: 500;
                 transition: all 0.2s;
             }
 
                 .sidebar .nav-link:hover,
                 .sidebar .nav-link.active {
-                    background-color: #084cdf;
+                    background-color: #343a40;
                     color: #fff;
-                    border-left: 4px solid #ffc107;
+                    border-left: 4px solid #0d6efd;
                 }
 
         .main-content {
@@ -66,11 +65,12 @@
         }
 
             .topbar h4 {
-                font-weight: bold;
+                font-weight: 600;
+                color: #343a40;
             }
 
         footer {
-            margin-top: 40px;
+            margin-top: 50px;
             text-align: center;
             font-size: 0.9rem;
             color: #6c757d;
@@ -78,6 +78,15 @@
 
         .dropdown-toggle {
             font-weight: 500;
+        }
+
+        .dropdown-menu {
+            font-size: 0.9rem;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #0d6efd;
+            color: #fff;
         }
     </style>
 </head>
@@ -98,11 +107,6 @@
                 <i class="bi bi-check-circle-fill me-2"></i> Kabul Edilen Projeler
             </a>
 
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "FreelancerProject" ? "active" : "")"
-               asp-area="Freelancer" asp-controller="FreelancerProject" asp-action="MyProjects">
-                <i class="bi bi-kanban-fill me-2"></i> Proje Görevleri
-            </a>
-
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "FreelancerBid" ? "active" : "")"
                asp-area="Freelancer" asp-controller="FreelancerBid" asp-action="MyBids">
                 <i class="bi bi-cash-stack me-2"></i> Tekliflerim
@@ -112,11 +116,11 @@
                asp-area="Freelancer" asp-controller="FreelancerMessage" asp-action="Index">
                 <i class="bi bi-chat-dots-fill me-2"></i> Mesajlar
             </a>
+
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "FreelancerReview" ? "active" : "")"
                asp-area="Freelancer" asp-controller="FreelancerReview" asp-action="Index">
                 <i class="bi bi-chat-quote-fill me-2"></i> Yorumlarım
             </a>
-
 
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "FreelancerProfile" ? "active" : "")"
                asp-area="Freelancer" asp-controller="FreelancerProfile" asp-action="Index">

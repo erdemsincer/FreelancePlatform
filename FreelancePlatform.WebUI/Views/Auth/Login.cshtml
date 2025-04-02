@@ -5,11 +5,14 @@
 }
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="row border rounded-5 p-4 bg-white shadow-lg box-area" style="width: 400px;">
+    <div class="row border rounded-4 p-5 bg-white shadow-lg box-area" style="max-width: 420px; width: 100%;">
 
         <div class="text-center mb-4">
+            <div class="mb-2">
+                <i class="bi bi-person-circle fs-1 text-primary"></i>
+            </div>
             <h3 class="fw-bold">Giriş Yap</h3>
-            <p class="text-muted small">Teklif verebilmek ve projeleri yönetmek için giriş yap.</p>
+            <p class="text-muted small">Projeleri yönetmek ve teklif vermek için hesabınıza giriş yapın.</p>
         </div>
 
         @if (ViewBag.Error != null)
@@ -19,40 +22,47 @@
 
         <form asp-action="Login" method="post" class="needs-validation" novalidate>
             <div class="form-group mb-3">
-                <label class="form-label fw-semibold" for="email">E-Posta</label>
+                <label class="form-label fw-semibold">E-Posta</label>
                 <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="bi bi-envelope-fill text-secondary"></i></span>
+                    <span class="input-group-text bg-light"><i class="bi bi-envelope-fill text-primary"></i></span>
                     <input asp-for="Email" class="form-control" placeholder="ornek@mail.com" required />
                 </div>
                 <span asp-validation-for="Email" class="text-danger small"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label fw-semibold" for="password">Şifre</label>
+                <label class="form-label fw-semibold">Şifre</label>
                 <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="bi bi-lock-fill text-secondary"></i></span>
-                    <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" required />
+                    <span class="input-group-text bg-light"><i class="bi bi-lock-fill text-primary"></i></span>
+                    <input asp-for="Password" type="password" class="form-control" id="password" placeholder="••••••••" required />
+                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('password')">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
                 </div>
                 <span asp-validation-for="Password" class="text-danger small"></span>
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg rounded-3">Giriş Yap</button>
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Giriş Yap
+                </button>
             </div>
         </form>
 
         <div class="text-center mt-3">
-            <small class="text-muted">Hesabınız yok mu? <a href="/Auth/Register" class="text-primary text-decoration-none">Kayıt Ol</a></small>
+            <small class="text-muted">
+                Hesabınız yok mu?
+                <a href="/Auth/Register" class="text-decoration-none fw-bold text-primary">Kayıt Ol</a>
+            </small>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap Icons CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-
+<!-- Styles -->
 <style>
     body {
-        background: linear-gradient(135deg, #e0eafc, #cfdef3);
+        background: linear-gradient(to right, #e3f2fd, #f1f8ff);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .box-area {
@@ -62,7 +72,7 @@
     @@keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
         }
 
         to {
@@ -71,8 +81,40 @@
         }
     }
 
-    input:focus {
-        box-shadow: 0 0 5px #0d6efd;
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        border-color: #0d6efd;
+    }
+
+    .btn-outline-secondary {
+        border-radius: 0;
+    }
+
+    .input-group-text {
+        border-right: none;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #0d6efd;
+        color: white;
     }
 </style>
 
+<!-- Scripts -->
+@section Scripts {
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            } else {
+                input.type = "password";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            }
+        }
+    </script>
+}
