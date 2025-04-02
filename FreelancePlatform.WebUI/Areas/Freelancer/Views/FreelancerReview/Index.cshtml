@@ -1,0 +1,62 @@
+﻿@model List<FreelancePlatform.Core.DTOs.ReviewDtos.ResultReviewDto>
+@{
+    ViewData["Title"] = "Aldığım Yorumlar";
+    Layout = "~/Areas/Freelancer/Views/FreelancerLayout/Index.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 text-primary">
+            <i class="bi bi-chat-quote-fill me-2"></i> Freelancer Yorumları
+        </h2>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center rounded-4 shadow-sm py-4">
+                <i class="bi bi-info-circle me-2"></i> Henüz size yapılmış bir değerlendirme bulunmamaktadır.
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var review in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 shadow rounded-4 h-100 review-card">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-dark fw-bold mb-2">@review.ProjectTitle</h5>
+
+                                <div class="mb-2 text-warning fs-5">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="bi @(i <= review.Rating ? "bi-star-fill" : "bi-star")"></i>
+                                    }
+                                </div>
+
+                                <p class="card-text text-muted mb-3">
+                                    <i class="bi bi-chat-dots me-1 text-info"></i>
+                                    "@review.Comment"
+                                </p>
+
+                                <div class="mt-auto small text-end text-secondary">
+                                    <i class="bi bi-person-circle me-1"></i>
+                                    <span class="fw-semibold">@review.ReviewerName</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+    .review-card {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+    }
+</style>

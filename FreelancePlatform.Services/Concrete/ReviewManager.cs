@@ -13,6 +13,11 @@ namespace FreelancePlatform.Services.Concrete
             _reviewDal = reviewDal;
         }
 
+        public Task<List<Review>> GetReviewsByRevieweeIdAsync(int revieweeId)
+        {
+            return _reviewDal.GetReviewsByRevieweeIdAsync(revieweeId);
+        }
+
         public async Task<List<Review>> GetReviewsByUserIdAsync(int userId)
         {
             return await _reviewDal.GetReviewsByUserIdAsync(userId);

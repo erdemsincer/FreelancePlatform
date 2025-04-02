@@ -51,7 +51,11 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<Notification, ResultNotificationDto>().ReverseMap();
             CreateMap<CreateNotificationDto, Notification>();
 
-            CreateMap<Review, ResultReviewDto>().ReverseMap();
+            CreateMap<Review, ResultReviewDto>()
+     .ForMember(dest => dest.ReviewerName, opt => opt.MapFrom(src => src.Reviewer.FirstName + " " + src.Reviewer.LastName))
+     .ForMember(dest => dest.RevieweeName, opt => opt.MapFrom(src => src.Reviewee.FirstName + " " + src.Reviewee.LastName))
+     .ForMember(dest => dest.ProjectTitle, opt => opt.MapFrom(src => src.Project.Title));
+
             CreateMap<CreateReviewDto, Review>().ReverseMap();
 
             CreateMap<Attachment, ResultAttachmentDto>().ReverseMap();

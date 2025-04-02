@@ -22,5 +22,15 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Where(r => r.RevieweeId == userId)
                 .ToListAsync();
         }
+        public async Task<List<Review>> GetReviewsByRevieweeIdAsync(int revieweeId)
+        {
+            return await _context.Reviews
+         .Include(x => x.Reviewer)
+         .Include(x => x.Reviewee)
+         .Include(x => x.Project)
+         .Where(x => x.RevieweeId == revieweeId)
+         .ToListAsync();
+        }
+
     }
 }

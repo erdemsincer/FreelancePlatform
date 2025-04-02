@@ -76,5 +76,13 @@ namespace FreelancePlatform.WebAPI.Controllers
 
             return Ok(result);
         }
+        [HttpGet("freelancer/{freelancerId}")]
+        public async Task<IActionResult> GetReviewsByFreelancer(int freelancerId)
+        {
+            var reviews = await _reviewService.GetReviewsByRevieweeIdAsync(freelancerId);
+            var result = _mapper.Map<List<ResultReviewDto>>(reviews);
+            return Ok(result);
+        }
+
     }
 }
