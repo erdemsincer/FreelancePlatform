@@ -4,5 +4,6 @@ namespace FreelancePlatform.Services.Abstract
 {
     public interface IReviewService : IGenericService<Review>
     {
+        Task<List<Review>> GetReviewsByUserIdAsync(int userId);
     }
 }

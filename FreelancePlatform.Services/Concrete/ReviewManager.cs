@@ -7,6 +7,12 @@ namespace FreelancePlatform.Services.Concrete
     public class ReviewManager : IReviewService
     {
         private readonly IReviewDal _reviewDal;
+
+        public async Task<List<Review>> GetReviewsByUserIdAsync(int userId)
+        {
+            return await _reviewDal.GetReviewsByUserIdAsync(userId);
+        }
+
         public async Task TAddAsync(Review entity)
         {
             await _reviewDal.AddAsync(entity);

@@ -59,5 +59,20 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _reviewService.TDeleteAsync(review);
             return Ok(new { message = "Değerlendirme başarıyla silindi!" });
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetReviewsForUser(int userId)
+        {
+            var reviews = await _reviewService.GetReviewsByUserIdAsync(userId);
+            var result = reviews.Select(r => new ResultReviewDto
+            {
+                Id = r.Id,
+                Comment = r.Comment,
+                Rating = r.Rating,
+                ReviewerName = $"{r.Reviewer.FirstName} {r.Reviewer.LastName}",
+                ProjectTitle = r.Project.Title
+            }).ToList();
+
+            return Ok(result);
+        }
     }
 }
