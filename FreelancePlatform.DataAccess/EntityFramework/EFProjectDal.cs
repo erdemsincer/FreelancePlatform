@@ -43,6 +43,12 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Include(p => p.Employer)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+        public async Task<List<Project>> GetProjectsByEmployerIdAsync(int employerId)
+        {
+            return await _context.Projects
+                .Where(p => p.EmployerId == employerId)
+                .ToListAsync();
+        }
 
 
 

@@ -64,6 +64,14 @@ namespace FreelancePlatform.WebAPI.Controllers
             return Ok(dto);
         }
 
+        [HttpGet("employer/{employerId}")]
+        public async Task<IActionResult> GetProjectsByEmployerId(int employerId)
+        {
+            var projects = await _projectService.GetProjectsByEmployerIdAsync(employerId);
+            var result = _mapper.Map<List<ResultProjectDto>>(projects);
+            return Ok(result);
+        }
+
 
 
 
