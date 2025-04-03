@@ -65,12 +65,9 @@ namespace FreelancePlatform.Services.Concrete
             return await _projectDal.GetCompletedProjectsAsync();
         }
 
-
-
-
-
-
-
-
+        public async Task<List<Project>> GetCompletedProjectsByFreelancerIdAsync(int freelancerId)
+        {
+           return await _projectDal.GetCompletedProjectsByFreelancerIdAsync(freelancerId);
+        }
     }
 }
