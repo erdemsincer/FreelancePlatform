@@ -10,6 +10,10 @@ namespace FreelancePlatform.Services.Abstract
         Task<Project> GetProjectByIdWithIncludeAsync(int id);
         Task<List<Project>> GetProjectsByEmployerIdAsync(int employerId);
         Task<List<Project>> GetAllProjectsWithCategoryAsync();
+        Task<List<Project>> GetCompletedProjectsAsync();
+
+
+
 
 
     }

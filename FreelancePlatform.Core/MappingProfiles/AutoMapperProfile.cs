@@ -100,6 +100,7 @@ namespace FreelancePlatform.Core.MappingProfiles
 
 
             CreateMap<Project, UpdateProjectStatusDto>().ReverseMap();
+
         }
     }
 }

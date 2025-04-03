@@ -61,6 +61,19 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                                  .Include(p => p.Category)
                                  .ToListAsync();
         }
+        public async Task<List<Project>> GetCompletedProjectsAsync()
+        {
+            return await _context.Projects
+                .Where(p => p.Status == "Tamamlandı")
+                .Include(p => p.Category)
+                .Include(p => p.Employer)
+                .Take(6)  
+                .ToListAsync();
+        }
+
+
+
+
 
 
 

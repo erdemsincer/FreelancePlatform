@@ -91,6 +91,16 @@ namespace FreelancePlatform.WebAPI.Controllers
             var result = _mapper.Map<List<ResultProjectDto>>(filtered);
             return Ok(result);
         }
+        [HttpGet("completed")]
+        public async Task<IActionResult> GetCompleted()
+        {
+            var projects = await _projectService.GetCompletedProjectsAsync();
+            var result = _mapper.Map<List<ResultProjectDto>>(projects);
+            return Ok(result);
+        }
+
+
+
 
 
 
