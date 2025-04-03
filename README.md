@@ -1,29 +1,38 @@
-Freelancer Platform
-Bu proje, freelancer'lar ile işverenlerin bir araya gelerek iş teklifleri vermesi ve alması, projelerin yönetilmesi ve yorumlanması için geliştirilmiş bir platformdur. Kullanıcılar, proje oluşturabilir, teklif verebilir, projeleri takip edebilir ve tamamlanan projelere değerlendirme yapabilir. Freelancer'lar, kendi profil sayfalarında portföylerini sergileyebilir ve proje teklifleri alabilirler.
+# Freelancer Platform
 
-Özellikler
-Kullanıcı Profili: Kullanıcılar, kendilerine ait profil sayfası üzerinden portföylerini, ilanlarını ve aldığı yorumları görüntüleyebilir.
+Freelancer Platform, freelancer'lar ile işverenlerin bir araya gelerek iş teklifleri vermesi ve alması, projelerin yönetilmesi ve yorumlanması için geliştirilmiş bir platformdur. Kullanıcılar, proje oluşturabilir, teklif verebilir, projeleri takip edebilir ve tamamlanan projelere değerlendirme yapabilir. Freelancer'lar, kendi profil sayfalarında portföylerini sergileyebilir ve proje teklifleri alabilirler.
 
-Proje Yönetimi: İşverenler, projelerinin durumlarını güncelleyebilir, teklifleri kabul edebilir ve projelerine teklif verebilir.
+## Özellikler
 
-Teklif Sistemi: Freelancer'lar projelere teklif verebilir ve işverenler gelen teklifleri yönetebilir.
+### 1. Kullanıcı Profili
+Kullanıcılar, kendilerine ait profil sayfası üzerinden portföylerini, ilanlarını ve aldığı yorumları görüntüleyebilir. Freelancer'lar, profillerinde tamamladıkları projeleri ve aldığı değerlendirmeleri sergileyebilir.
 
-Değerlendirme Sistemi: Tamamlanan projelere göre freelancer'lar işverenler tarafından değerlendirilir ve yorumlar bırakılır.
+### 2. Proje Yönetimi
+İşverenler, projelerinin durumlarını güncelleyebilir, teklifleri kabul edebilir ve projelerine teklif verebilir. Projeler üzerinde teklif verme, kabul etme ve durum güncelleme işlemleri yapılabilir.
 
-Proje Filtreleme: Kullanıcılar, projeleri kategoriye göre filtreleyebilir ve arama yapabilir.
+### 3. Teklif Sistemi
+Freelancer'lar projelere teklif verebilir ve işverenler gelen teklifleri yönetebilir. Her proje için teklif süreci başlatılabilir ve takip edilebilir.
 
-Mesajlaşma Sistemi: Freelancer'lar ve işverenler arasında iletişim kurabilen mesajlaşma sistemi.
+### 4. Değerlendirme Sistemi
+Tamamlanan projelere göre freelancer'lar işverenler tarafından değerlendirilir ve yorumlar bırakılır. Freelancer'lar, projeyi tamamladıktan sonra işverenlerden yorum ve puan alabilir.
 
-Teknolojiler
-ASP.NET Core: Web API ve backend geliştirme.
+### 5. Proje Filtreleme
+Kullanıcılar, projeleri kategoriye göre filtreleyebilir ve anahtar kelimelere göre arama yapabilir. Projeler, filtreleme ve sıralama seçenekleri ile daha kolay bulunabilir.
 
-Entity Framework Core: Veritabanı yönetimi ve CRUD işlemleri.
+### 6. Mesajlaşma Sistemi
+Freelancer'lar ve işverenler arasında iletişim kurabilen mesajlaşma sistemi. Proje hakkında geri bildirim almak, sorular sormak veya ayrıntılı görüşmeler yapmak için mesajlaşma kullanılır.
 
-JWT Authentication: Kullanıcı doğrulama.
+## Teknolojiler
 
-ViewComponents: Kullanıcı profili ve proje detay sayfalarında dinamik içerik.
+- **ASP.NET Core**: Web API ve backend geliştirme için kullanılır.
+- **Entity Framework Core**: Veritabanı yönetimi ve CRUD işlemleri için kullanılır.
+- **JWT Authentication**: Kullanıcı doğrulama işlemleri için kullanılır.
+- **ViewComponents**: Kullanıcı profili ve proje detay sayfalarında dinamik içerik sağlamak için kullanılır.
+- **PostgreSQL**: Veri yönetimi için kullanılır.
 
-PostgreSQL: Veri yönetimi.
+
+# Görüntüler
+
 ![Image](https://github.com/user-attachments/assets/742f0047-e807-4803-adb7-af3b8a3431da)
 ![Image](https://github.com/user-attachments/assets/b47f2789-da48-43c7-8b0e-d11c4548ae9f)
 ![Image](https://github.com/user-attachments/assets/840f9282-2670-439a-b0c7-53601343efc0)
