@@ -1,0 +1,110 @@
+﻿@model FreelancePlatform.Core.DTOs.UserDtos.ResultUserDto
+@{
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName} | Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-3 text-center">
+                @await Component.InvokeAsync("FreelancerProfileInfo", new { userId = ViewBag.UserId })
+            </div>
+
+            <div class="col-md-9">
+                <!-- PORTFOLYO -->
+                <div class="mb-5">
+                    @await Component.InvokeAsync("Portfolio", new { userId = ViewBag.UserId })
+                </div>
+
+                <!-- HİZMETLER / İLANLAR -->
+                <div class="mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="fw-bold text-dark">Hizmetler</h4>
+                    </div>
+                    <div class="d-flex gap-3 overflow-auto user-ads-scroll pb-2">
+                        @await Component.InvokeAsync("UserAdvertisements", new { userId = ViewBag.UserId })
+                    </div>
+                </div>
+
+                <!-- DEĞERLENDİRMELER -->
+                <div class="mb-5">
+                    @await Component.InvokeAsync("FreelancerReviews", new { userId = ViewBag.UserId })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Profil ve hizmetlerin daha şık ve düzenli görünmesini sağlamak için */
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.4em 0.75em;
+        border-radius: 1rem;
+    }
+
+    .user-ads-scroll::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .user-ads-scroll::-webkit-scrollbar-thumb {
+        background-color: #ced4da;
+        border-radius: 10px;
+    }
+
+    .user-ads-scroll {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        margin-top: 1rem;
+    }
+
+        .user-ads-scroll .card {
+            min-width: 300px;
+            scroll-snap-align: start;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .user-ads-scroll .card:hover {
+                transform: translateY(-5px);
+            }
+
+    .card-img-top {
+        font-size: 1.1rem;
+        color: #444;
+        height: 150px;
+        background-color: #f1f1f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    .card-body h6 {
+        font-size: 1rem;
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+    .card-body p {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .text-success {
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+</style>
