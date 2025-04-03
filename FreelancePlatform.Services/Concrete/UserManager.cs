@@ -49,7 +49,12 @@ namespace FreelancePlatform.Services.Concrete
         {
             return await _userDal.GetUserDetailAsync(id);
         }
+        public async Task<ResultUserDto> GetPublicUserInfoAsync(int id)
+        {
+            return await _userDal.GetPublicUserInfoAsync(id);
+        }
 
-       
+
+
     }
 }

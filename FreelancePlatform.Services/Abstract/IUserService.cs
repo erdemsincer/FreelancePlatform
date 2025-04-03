@@ -8,6 +8,8 @@ namespace FreelancePlatform.Services.Abstract
 
         Task<List<ResultUserDto>> GetFreelancerUsersAsync();
         Task<User> GetUserDetailAsync(int id);
+        Task<ResultUserDto> GetPublicUserInfoAsync(int id);
+
 
 
 

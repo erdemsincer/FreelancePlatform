@@ -41,7 +41,25 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
-     
+        public async Task<ResultUserDto> GetPublicUserInfoAsync(int id)
+        {
+            var user = await _context.Users
+                .Where(x => x.Id == id)
+                .Select(x => new ResultUserDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email,
+                    ProfileImageUrl = x.ProfileImageUrl,
+                    CreatedAt = x.CreatedAt
+                })
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
+
+
 
     }
 }

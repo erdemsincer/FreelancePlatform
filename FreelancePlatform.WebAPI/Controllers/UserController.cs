@@ -66,7 +66,17 @@ namespace FreelancePlatform.WebAPI.Controllers
             var freelancers = await _userService.GetFreelancerUsersAsync();
             return Ok(freelancers);
         }
-     
+        [HttpGet("public/{id}")]
+        public async Task<IActionResult> GetPublicUserInfo(int id)
+        {
+            var user = await _userService.GetPublicUserInfoAsync(id);
+            if (user == null)
+                return NotFound("Kullanıcı bulunamadı");
+
+            return Ok(user);
+        }
+
+
 
 
     }
