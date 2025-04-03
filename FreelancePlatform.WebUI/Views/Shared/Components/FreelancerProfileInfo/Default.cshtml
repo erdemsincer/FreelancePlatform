@@ -1,0 +1,82 @@
+﻿@model FreelancePlatform.Core.DTOs.UserDtos.ResultUserDto
+
+<div class="card border-0 shadow-lg rounded-4 p-4 text-center user-profile-card">
+    <div class="mb-4">
+        <img src="@Model.ProfileImageUrl" class="rounded-circle shadow-sm border" width="120" height="120" alt="Profil" />
+    </div>
+
+    <h5 class="fw-bold mb-1 text-dark">@Model.FirstName @Model.LastName</h5>
+    <p class="text-muted fst-italic">Freelancer</p>
+
+    <div class="mb-2">
+        <span class="text-warning fw-bold">
+            <i class="bi bi-star-fill"></i> 4.9
+        </span>
+        <span class="text-muted">(927)</span>
+    </div>
+
+    <a href="/Message/Send?receiverId=@Model.Id" class="btn btn-primary w-100 rounded-pill fw-semibold">
+        <i class="bi bi-chat-dots-fill me-1"></i> Mesaj Gönder
+    </a>
+
+    <hr class="my-4" />
+
+    <div class="text-start small">
+        <p><i class="bi bi-calendar-check me-1 text-success"></i> Üyelik Tarihi: <strong>@Model.CreatedAt.ToString("MMMM yyyy")</strong></p>
+        <p><i class="bi bi-envelope-fill me-1 text-primary"></i> @Model.Email</p>
+    </div>
+</div>
+
+<style>
+    .user-profile-card {
+        max-width: 350px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+    }
+
+        .user-profile-card img {
+            object-fit: cover;
+            border: 4px solid #f1f1f1;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .user-profile-card img:hover {
+                transform: scale(1.1);
+            }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .text-muted {
+        color: #6c757d !important;
+    }
+
+    .text-dark {
+        color: #343a40 !important;
+    }
+
+    .card h5 {
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .bi-star-fill {
+        color: #ff9f00;
+    }
+
+    .bi-envelope-fill, .bi-calendar-check {
+        font-size: 1.1rem;
+    }
+
+    .text-start p {
+        margin-bottom: 10px;
+    }
+</style>

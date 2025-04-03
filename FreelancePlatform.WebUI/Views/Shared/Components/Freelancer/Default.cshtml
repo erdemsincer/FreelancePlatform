@@ -16,7 +16,7 @@
                     <p class="text-muted small mb-2">@user.Email</p>
                     <span class="badge bg-primary-subtle text-primary small mb-2">Üyelik: @user.CreatedAt.ToString("dd.MM.yyyy")</span>
                     <div class="d-flex justify-content-between mt-3 gap-2">
-                        <a href="/Users/Detail/@user.Id" class="btn btn-sm btn-outline-primary w-50 rounded-pill">Profil</a>
+                        <a href="/Users/Index/@user.Id" class="btn btn-sm btn-outline-primary w-50 rounded-pill">Profil</a>
                         <a href="/Messages/Send?userId=@user.Id" class="btn btn-sm btn-outline-dark w-50 rounded-pill">Mesaj</a>
                     </div>
                 </div>

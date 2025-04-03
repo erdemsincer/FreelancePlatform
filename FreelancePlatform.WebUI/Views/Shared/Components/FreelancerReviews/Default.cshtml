@@ -1,0 +1,47 @@
+﻿@model List<FreelancePlatform.Core.DTOs.ReviewDtos.ResultReviewDto>
+
+@if (Model.Any())
+{
+    <section class="bg-white border rounded-4 p-4 mb-5">
+        <h4 class="fw-bold mb-4 text-dark">
+            <i class="bi bi-star-fill text-warning me-1"></i> Tüm Değerlendirmeler
+        </h4>
+
+        <div class="row mb-3 text-center">
+            <div class="col-md-4">
+                <i class="bi bi-star-half fs-4 text-warning"></i>
+                <p class="fw-semibold mb-1">Hizmet Kalitesi</p>
+                <div class="text-warning">★★★★★</div>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-clock-history fs-4 text-primary"></i>
+                <p class="fw-semibold mb-1">Zamanlama</p>
+                <div class="text-warning">★★★★★</div>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-chat-left-dots fs-4 text-success"></i>
+                <p class="fw-semibold mb-1">İletişim Becerisi</p>
+                <div class="text-warning">★★★★★</div>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+
+        @foreach (var review in Model)
+        {
+            <div class="mb-4 pb-3 border-bottom">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-person-circle fs-3 text-secondary me-2"></i>
+                        <div>
+                            <strong>@review.ReviewerName</strong>
+                            <span class="text-warning ms-1">⭐ @review.Rating</span>
+                        </div>
+                    </div>
+                    <span class="text-muted small">@review.ProjectTitle</span>
+                </div>
+                <p class="mt-2 text-dark">@review.Comment</p>
+            </div>
+        }
+    </section>
+}
