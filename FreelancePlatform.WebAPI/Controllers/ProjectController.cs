@@ -50,8 +50,9 @@ namespace FreelancePlatform.WebAPI.Controllers
         [HttpGet("detailed")]
         public async Task<IActionResult> GetAllDetailed()
         {
-            var result = await _projectService.GetAllDetailedProjectsAsync();
-            return Ok(result);
+            var allProjects = await _projectService.GetAllDetailedProjectsAsync();
+            var openProjects = allProjects.Where(p => p.Status == "Açık").ToList();
+            return Ok(openProjects);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProjectDetailById(int id)
