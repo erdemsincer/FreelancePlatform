@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace FreelancePlatform.WebUI.Areas.Employer.Controllers
 {
@@ -36,5 +37,25 @@ namespace FreelancePlatform.WebUI.Areas.Employer.Controllers
 
             return View(projects);
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdateProjectStatus(UpdateProjectStatusDto model)
+        {
+            var token = HttpContext.Session.GetString("token");
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var jsonData = JsonConvert.SerializeObject(model);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync("https://localhost:7085/api/Project/update-status", content);
+
+            if (response.IsSuccessStatusCode)
+                TempData["success"] = "Durum güncellendi!";
+            else
+                TempData["error"] = "Durum güncellenemedi!";
+
+            return RedirectToAction("MyProjects");
+        }
+
     }
 }

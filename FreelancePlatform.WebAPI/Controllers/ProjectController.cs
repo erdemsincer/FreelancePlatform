@@ -71,6 +71,18 @@ namespace FreelancePlatform.WebAPI.Controllers
             var result = _mapper.Map<List<ResultProjectDto>>(projects);
             return Ok(result);
         }
+        [HttpPut("update-status")]
+        public async Task<IActionResult> UpdateStatus([FromBody] UpdateProjectStatusDto dto)
+        {
+            var project = await _projectService.TGetByIdAsync(dto.ProjectId);
+            if (project == null) return NotFound("Proje bulunamadı!");
+
+            project.Status = dto.NewStatus;
+            await _projectService.TUpdateAsync(project);
+
+            return Ok(new { message = "Proje durumu güncellendi!" });
+        }
+
 
 
 

@@ -31,7 +31,7 @@
                                     <span class="badge bg-secondary-subtle text-dark me-2">
                                         <i class="bi bi-calendar-event me-1"></i> @project.CreatedAt.ToString("dd.MM.yyyy")
                                     </span>
-                                    <span class="badge bg-@(project.Status == "Açık" ? "success" : "secondary")">
+                                    <span class="badge bg-@(project.Status == "Açık" ? "success" : project.Status == "Alındı" ? "warning text-dark" : "secondary")">
                                         <i class="bi bi-rocket-takeoff me-1"></i> @project.Status
                                     </span>
                                 </div>
@@ -49,7 +49,17 @@
                                         <i class="bi bi-kanban-fill me-1"></i> Görevleri Gör
                                     </a>
 
-    
+                                    <form asp-action="UpdateProjectStatus" asp-controller="EmployerProject" asp-area="Employer" method="post" class="d-flex gap-2 align-items-center mt-2">
+                                        <input type="hidden" name="projectId" value="@project.Id" />
+                                        <select name="newStatus" class="form-select form-select-sm w-auto">
+                                            <option value="Açık" selected="@(project.Status == "Açık")">Açık</option>
+                                            <option value="Alındı" selected="@(project.Status == "Alındı")">Alındı</option>
+                                            <option value="Tamamlandı" selected="@(project.Status == "Tamamlandı")">Tamamlandı</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-outline-success">
+                                            <i class="bi bi-arrow-repeat me-1"></i> Güncelle
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -66,10 +76,10 @@
         background: white;
     }
 
-    .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
 
     .btn-sm {
         font-size: 0.9rem;
@@ -79,6 +89,11 @@
         font-size: 0.75rem;
         padding: 0.4em 0.75em;
         border-radius: 1rem;
+    }
+
+    .form-select-sm {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
     }
 </style>
 

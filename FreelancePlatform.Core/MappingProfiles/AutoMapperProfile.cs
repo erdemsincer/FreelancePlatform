@@ -96,6 +96,10 @@ namespace FreelancePlatform.Core.MappingProfiles
             CreateMap<Advertisement, ResultAdvertisementDto>()
                 .ForMember(dest => dest.FreelancerFullName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+
+
+
+            CreateMap<Project, UpdateProjectStatusDto>().ReverseMap();
         }
     }
 }
