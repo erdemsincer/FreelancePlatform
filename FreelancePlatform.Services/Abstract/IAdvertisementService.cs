@@ -10,6 +10,7 @@ namespace FreelancePlatform.Services.Abstract
     public interface IAdvertisementService : IGenericService<Advertisement>
     {
         Task<List<Advertisement>> TGetAllWithIncludesAsync();
+        Task<List<Advertisement>> GetAdvertisementsByFreelancerIdAsync(int freelancerId);
     }
 
 }

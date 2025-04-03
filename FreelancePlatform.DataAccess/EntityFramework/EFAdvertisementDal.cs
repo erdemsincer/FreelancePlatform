@@ -27,6 +27,16 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Include(x => x.Freelancer)
                 .ToListAsync();
         }
+        public async Task<List<Advertisement>> GetAdvertisementsByFreelancerIdAsync(int freelancerId)
+        {
+            return await _context.Advertisements
+                .Include(x => x.Category)
+                .Include(x => x.Freelancer)
+                .Where(x => x.FreelancerId == freelancerId)
+                .ToListAsync();
+        }
+
+
     }
 
 }

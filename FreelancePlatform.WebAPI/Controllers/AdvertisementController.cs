@@ -71,5 +71,13 @@ namespace FreelancePlatform.WebAPI.Controllers
             await _advertisementService.TDeleteAsync(advert);
             return Ok("İlan başarıyla silindi.");
         }
+        [HttpGet("freelancer/{freelancerId}")]
+        public async Task<IActionResult> GetByFreelancer(int freelancerId)
+        {
+            var ads = await _advertisementService.GetAdvertisementsByFreelancerIdAsync(freelancerId);
+            var result = _mapper.Map<List<ResultAdvertisementDto>>(ads);
+            return Ok(result);
+        }
+
     }
 }

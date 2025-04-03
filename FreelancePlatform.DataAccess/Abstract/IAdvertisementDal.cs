@@ -10,6 +10,7 @@ namespace FreelancePlatform.DataAccess.Abstract
     public interface IAdvertisementDal : IGenericDal<Advertisement>
     {
         Task<List<Advertisement>> GetAllWithIncludesAsync();
+        Task<List<Advertisement>> GetAdvertisementsByFreelancerIdAsync(int freelancerId);
     }
 
 }

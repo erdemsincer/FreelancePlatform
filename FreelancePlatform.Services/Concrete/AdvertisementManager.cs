@@ -42,5 +42,10 @@ namespace FreelancePlatform.Services.Concrete
         {
             await _advertisementDal.UpdateAsync(entity);
         }
+        public async Task<List<Advertisement>> GetAdvertisementsByFreelancerIdAsync(int freelancerId)
+        {
+            return await _advertisementDal.GetAdvertisementsByFreelancerIdAsync(freelancerId);
+        }
+
     }
 }
