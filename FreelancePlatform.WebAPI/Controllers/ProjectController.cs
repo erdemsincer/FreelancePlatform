@@ -83,6 +83,15 @@ namespace FreelancePlatform.WebAPI.Controllers
 
             return Ok(new { message = "Proje durumu güncellendi!" });
         }
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetProjectsByCategory(int categoryId)
+        {
+            var projects = await _projectService.GetAllProjectsWithCategoryAsync();
+            var filtered = projects.Where(p => p.CategoryId == categoryId && p.Status == "Açık").ToList();
+            var result = _mapper.Map<List<ResultProjectDto>>(filtered);
+            return Ok(result);
+        }
+
 
 
 

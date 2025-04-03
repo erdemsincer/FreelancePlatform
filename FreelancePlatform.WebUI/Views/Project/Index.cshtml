@@ -6,48 +6,81 @@
 
 <section class="py-5" style="background: linear-gradient(to right, #f0f4ff, #d9e2ec);">
     <div class="container">
-        <h2 class="mb-5 text-center fw-bold display-5 text-dark">Mevcut <span class="text-primary">Projeler</span></h2>
-        <div class="row g-4">
-            @foreach (var project in Model)
-            {
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-lg border-0 rounded-4 hover-shadow">
-                        <div class="card-header bg-light border-bottom p-3 rounded-top-4">
-                            <h5 class="card-title fw-bold text-primary mb-0">@project.Title</h5>
-                            <small class="text-muted">Kategori: <strong>@project.CategoryName</strong></small>
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <p class="text-secondary small mb-2">İşveren: <strong>@project.EmployerFullName</strong></p>
-                            <p class="text-dark small flex-grow-1">@project.Description.Substring(0, Math.Min(project.Description.Length, 100))...</p>
 
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="badge bg-success">Bütçe: @project.Budget ₺</span>
-                                <span class="badge bg-@(project.Status == "Açık" ? "primary" : "secondary")">@project.Status</span>
+        <h2 class="mb-4 text-center fw-bold display-5 text-dark">
+            Mevcut <span class="text-primary">Projeler</span>
+        </h2>
+
+        <!-- Filtreleme Alanı -->
+        <form method="get" asp-controller="Project" asp-action="ProjectsByCategory" class="mb-5 text-center">
+            <div class="input-group w-50 mx-auto shadow-sm">
+                <select name="categoryId" class="form-select rounded-start-pill">
+                    <option value="">Tüm Kategoriler</option>
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                </select>
+                <button type="submit" class="btn btn-primary rounded-end-pill px-4">
+                    <i class="bi bi-funnel-fill me-1"></i> Filtrele
+                </button>
+            </div>
+        </form>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center shadow-sm rounded-4 py-4 mt-4">
+                <i class="bi bi-exclamation-circle-fill me-2"></i> Seçilen kategoriye ait proje bulunamadı.
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var project in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-lg border-0 rounded-4 hover-shadow">
+                            <div class="card-header bg-light border-bottom p-3 rounded-top-4">
+                                <h5 class="card-title fw-bold text-primary mb-0">@project.Title</h5>
+                                <small class="text-muted">Kategori: <strong>@project.CategoryName</strong></small>
                             </div>
-                            <p class="text-muted mt-2 small">Yayın Tarihi: @project.CreatedAt.ToString("dd.MM.yyyy")</p>
-                            @if (project.Deadline != null)
-                            {
-                                <p class="text-danger small">Son Teslim: @project.Deadline?.ToString("dd.MM.yyyy")</p>
-                            }
-                        </div>
-                        <div class="card-footer bg-white border-0 text-center pb-4 d-flex flex-column gap-2">
-                            <a href="/Project/Detail/@project.Id" class="btn btn-outline-primary w-100 rounded-pill">Detayları Gör</a>
-                            @if (project.Status == "Açık")
-                            {
-                                <a asp-controller="Bid" asp-action="Create" asp-route-projectId="@project.Id" class="btn btn-success w-100 rounded-pill">
-                                    Teklif Ver
-                                </a>
 
-                            }
-                            else
-                            {
-                                <button class="btn btn-secondary w-100 rounded-pill" disabled>Alınmış</button>
-                            }
+                            <div class="card-body p-4 d-flex flex-column">
+                                <p class="text-secondary small mb-2">İşveren: <strong>@project.EmployerFullName</strong></p>
+                                <p class="text-dark small flex-grow-1">
+                                    @project.Description.Substring(0, Math.Min(project.Description.Length, 100))...
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="badge bg-success">Bütçe: @project.Budget ₺</span>
+                                    <span class="badge bg-@(project.Status == "Açık" ? "primary" : "secondary")">@project.Status</span>
+                                </div>
+
+                                <p class="text-muted mt-2 small">Yayın Tarihi: @project.CreatedAt.ToString("dd.MM.yyyy")</p>
+                                @if (project.Deadline != null)
+                                {
+                                    <p class="text-danger small">Son Teslim: @project.Deadline?.ToString("dd.MM.yyyy")</p>
+                                }
+                            </div>
+
+                            <div class="card-footer bg-white border-0 text-center pb-4 d-flex flex-column gap-2">
+                                <a href="/Project/Detail/@project.Id" class="btn btn-outline-primary w-100 rounded-pill">Detayları Gör</a>
+                                @if (project.Status == "Açık")
+                                {
+                                    <a asp-controller="Bid" asp-action="Create" asp-route-projectId="@project.Id" class="btn btn-success w-100 rounded-pill">
+                                        Teklif Ver
+                                    </a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary w-100 rounded-pill" disabled>Alınmış</button>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     </div>
 </section>
 
@@ -73,4 +106,10 @@
         .btn:hover {
             transform: scale(1.02);
         }
+
+    select.form-select {
+        min-width: 150px;
+    }
 </style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />

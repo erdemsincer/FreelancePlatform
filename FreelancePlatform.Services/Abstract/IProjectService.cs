@@ -8,7 +8,9 @@ namespace FreelancePlatform.Services.Abstract
 
         Task<List<ResultProjectDto>> GetAllDetailedProjectsAsync();
         Task<Project> GetProjectByIdWithIncludeAsync(int id);
-        Task<List<Project>> GetProjectsByEmployerIdAsync(int employerId);   
+        Task<List<Project>> GetProjectsByEmployerIdAsync(int employerId);
+        Task<List<Project>> GetAllProjectsWithCategoryAsync();
+
 
     }
 }

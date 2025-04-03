@@ -56,6 +56,12 @@ namespace FreelancePlatform.Services.Concrete
         {
             return await _projectDal.GetProjectsByEmployerIdAsync(employerId);
         }
+        public async Task<List<Project>> GetAllProjectsWithCategoryAsync()
+        {
+            return await _projectDal.GetAllProjectsWithCategoryAsync();
+        }
+
+
 
 
     }

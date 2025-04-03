@@ -49,6 +49,20 @@ namespace FreelancePlatform.DataAccess.EntityFramework
                 .Where(p => p.EmployerId == employerId)
                 .ToListAsync();
         }
+        public IQueryable<Project> Query()
+        {
+            return _context.Projects
+                           .Include(p => p.Category);
+                           
+        }
+        public async Task<List<Project>> GetAllProjectsWithCategoryAsync()
+        {
+            return await _context.Projects
+                                 .Include(p => p.Category)
+                                 .ToListAsync();
+        }
+
+
 
 
 
